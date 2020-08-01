@@ -5,3 +5,17 @@
 
   margin-left: 30px;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__info {
+    margin-left: 15px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .profile__info {
+    align-items: center;
+
+    margin-left: 0;
+  }
+}

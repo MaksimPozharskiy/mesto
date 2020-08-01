@@ -5,3 +5,9 @@
 
   padding-top: 36px;
 }
+
+@media screen and (max-width: 576px) {
+  .profile {
+    flex-direction: column;
+  }
+}

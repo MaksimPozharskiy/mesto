@@ -11,3 +11,19 @@
   outline: none;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__add-button {
+    width: 120px;
+    height: 50px;
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .profile__add-button {
+    width: 282px;
+
+    margin: 30px 0 0;
+  }
+}

@@ -9,3 +9,7 @@
 
   border: none;
 }
+
+.grid-photos__like:hover {
+  cursor: pointer;
+}

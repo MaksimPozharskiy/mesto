@@ -1,5 +1,6 @@
 @import url(../vendor/normalize.css);
 @import url(../fonts/fonts.css);
+@import url(../blocks/content/content.css);
 @import url(../blocks/container/container.css);
 @import url(../blocks/page/page.css);
 
@@ -19,3 +20,17 @@
 @import url(../blocks/profile/__profession/profile__profession.css);
 @import url(../blocks/profile/__wrap/profile__wrap.css);
 @import url(../blocks/profile/__container/profile__container.css);
+
+/* Grid-photos */
+
+@import url(../blocks/grid-photos/grid-photos.css);
+@import url(../blocks/grid-photos/__grid-item/grid-photos__grid-item.css);
+@import url(../blocks/grid-photos/__image/grid-photos__image.css);
+@import url(../blocks/grid-photos/__like/grid-photos__like.css);
+@import url(../blocks/grid-photos/__name/grid-photos__name.css);
+@import url(../blocks/grid-photos/__wrap/grid-photos__wrap.css);
+
+/* Footer */ 
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);

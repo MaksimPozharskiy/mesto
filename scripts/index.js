@@ -5,11 +5,12 @@ let popup = document.querySelector('.popup')
 let popupOpenButton = document.querySelector('.profile__edit-button');
 let popupCloseButton = popup.querySelector('.popup__button-close');
 let popupForm = popup.querySelector('.popup__form');
+let nameInput = popup.querySelector('.popup__input_name_name');
+let professionInput = popup.querySelector('.popup__input_name_profession');
 
 // Закрытие/открытие попапа по кнопкам
 let popupToggle = () => {
-  popup.classList.toggle('popup_opened')
-  fillValueForm();
+  popup.classList.toggle('popup_opened');
 }
 
 // Закрытие попапа по клике на оверлей
@@ -22,8 +23,6 @@ let closePopup = (event) => {
 let formSubmitHandler = event => {
   event.preventDefault();
 
-  let nameInput = popup.querySelector('.popup__input_name_name');
-  let professionInput = popup.querySelector('.popup__input_name_profession');
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
 
@@ -32,13 +31,13 @@ let formSubmitHandler = event => {
 
 // Функция для изначального заполнения значений полей формы
 let fillValueForm = () => {
-  let nameInput = popup.querySelector('.popup__input_name_name');
-  let professionInput = popup.querySelector('.popup__input_name_profession');
+
   nameInput.value = profileName.textContent;
   professionInput.value =  profileProfession.textContent;
+  popupToggle();
 }
 
-popupOpenButton.addEventListener('click', popupToggle);
+popupOpenButton.addEventListener('click', fillValueForm);
 popupCloseButton.addEventListener('click', popupToggle);
 popup.addEventListener('click', closePopup);
 

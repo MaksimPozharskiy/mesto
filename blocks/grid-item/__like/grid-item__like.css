@@ -1,4 +1,4 @@
-.grid-photos__like {
+.grid-item__like {
   width: 20px;
   height: 18px;
 
@@ -10,6 +10,6 @@
   border: none;
 }
 
-.grid-photos__like:hover {
+.grid-item__like:hover {
   cursor: pointer;
 }

@@ -22,8 +22,8 @@ let closePopup = (event) => {
 let formSubmitHandler = event => {
   event.preventDefault();
 
-  let nameInput = popup.querySelector('.popup__name');
-  let professionInput = popup.querySelector('.popup__profession');
+  let nameInput = popup.querySelector('.popup__input_name_name');
+  let professionInput = popup.querySelector('.popup__input_name_profession');
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
 
@@ -32,8 +32,8 @@ let formSubmitHandler = event => {
 
 // Функция для изначального заполнения значений полей формы
 let fillValueForm = () => {
-  let nameInput = popup.querySelector('.popup__name');
-  let professionInput = popup.querySelector('.popup__profession');
+  let nameInput = popup.querySelector('.popup__input_name_name');
+  let professionInput = popup.querySelector('.popup__input_name_profession');
   nameInput.value = profileName.textContent;
   professionInput.value =  profileProfession.textContent;
 }

@@ -12,10 +12,12 @@
   color: #FFF;
   background-color: #000;
   cursor: pointer;
+  border: none;
 }
 
 .popup__button-save:hover {
-  background-color: rgba(0, 0, 0, .8)
+  background-color: rgba(0, 0, 0, .8);
+  transition: ease 1s;
 }
 
 @media screen and (max-width: 500px) {

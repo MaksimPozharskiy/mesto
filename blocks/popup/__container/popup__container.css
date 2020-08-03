@@ -2,6 +2,8 @@
   width: 430px;
   
   position: absolute;
+  top: auto;
+  left: auto;
   box-sizing: border-box;
 
   padding: 0 36px;

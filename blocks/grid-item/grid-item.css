@@ -1,4 +1,5 @@
 .grid-item {
+  position: relative;
   height: 361px;
 
   background-color: #fff;

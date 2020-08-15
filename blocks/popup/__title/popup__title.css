@@ -10,14 +10,14 @@
   word-wrap: break-word;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 530px) {
   .popup__title {
     font-size: 20px;
   }
 }
 
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 430px) {
   .popup__title {
     font-size: 18px;
   }

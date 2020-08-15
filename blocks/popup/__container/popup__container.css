@@ -14,14 +14,14 @@
   border-radius: 10px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 530px) {
   .popup__container {
     width: 340px;
     padding: 0 16px;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 430px) {
   .popup__container {
     width: 260px;
     padding: 0 10px;

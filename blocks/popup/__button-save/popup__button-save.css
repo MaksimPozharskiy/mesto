@@ -20,13 +20,13 @@
   transition: ease 1s;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 530px) {
   .popup__button-save {
     width: 240px;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 430px) {
   .popup__button-save {
     width: 220px;
   }

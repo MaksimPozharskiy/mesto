@@ -1,3 +1,7 @@
+// @TODO Хочу сделать одну функцию по открытию и закрытию попапа, что бы на вход 
+// принимала попап и понимала какой надо закрыть. Не получилось сделать такое, скореее всего
+// надо закрытие/открытие переписать с toggle на 2 функции (открытия и закрытия) 
+
 // ==Попап редактирования профиля==
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
@@ -72,15 +76,17 @@ const initialCards =[
 ]
 
 const gridCardTemplate = document.querySelector('#grid-item').content;
-const gridPhotos = document.querySelector('.grid-photos');
+const gridPhotosContainer = document.querySelector('.grid-photos');
 
 const renderInitialCards = (initialCards) => {
   initialCards.forEach(card => {
     const gridCardElement = gridCardTemplate.cloneNode(true);
     gridCardElement.querySelector('.grid-item__image').src = card.link;
+    gridCardElement.querySelector('.grid-item__image').alt = card.name;
     gridCardElement.querySelector('.grid-item__name').textContent = card.name;
 
-    gridPhotos.append(gridCardElement);
+    gridPhotosContainer.append(gridCardElement);
+    
   });
 }
 renderInitialCards(initialCards);
@@ -105,14 +111,23 @@ const closeAddPopup = event => {
 const renderCard = (titleCard, linkCard) => {
   const gridCardElement = gridCardTemplate.cloneNode(true);
   const likeButton = gridCardElement.querySelector('.grid-item__like');
+  const image = gridCardElement.querySelector('.grid-item__image')
 
-  gridCardElement.querySelector('.grid-item__image').src = linkCard;
+  image.src = linkCard;
+  image.alt = titleCard;
   gridCardElement.querySelector('.grid-item__name').textContent = titleCard;
-  gridPhotos.prepend(gridCardElement);
+  
+  gridPhotosContainer.prepend(gridCardElement);
 
   likeButton.addEventListener('click', function () {
     likeButton.classList.toggle('grid-item__like_liked');
-  }) // добавляем слушатель лайка
+  })
+
+  image.addEventListener('click', function () {
+    popupImageToggle(image);
+    popupImage.src = image.src;
+    popupImageTitle.textContent = image.alt;
+  });
 }
 
 //Обработчик формы добавления карточки
@@ -131,7 +146,7 @@ popupAdd.addEventListener('click', closeAddPopup);
 popupAddForm.addEventListener('submit', formAddSubmitHandler);
 
 // ==Лайкнуть карточку==
-const likeButton = gridPhotos.querySelectorAll('.grid-item__like');
+const likeButton = gridPhotosContainer.querySelectorAll('.grid-item__like');
 // На каждую кнопку лайка навешиваем переключатель модификатора
 likeButton.forEach(likeButton => {
   likeButton.addEventListener('click', function () {
@@ -148,5 +163,32 @@ deleteIcons.forEach(icon => {
     icon.closest('.grid-item').remove();
   });
 })
+
+// ==Попап увеличения картинки==
+const gridPhotos = document.querySelectorAll('.grid-item__image');
+const popupImageWrap = document.querySelector('.popup_type_image');
+const popupImage = popupImageWrap.querySelector('.popup__image');
+const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
+const popupImageCloseButton = popupImageWrap.querySelector('.popup__button-close');
+
+gridPhotos.forEach(image => {
+  image.addEventListener('click', function () {
+    popupImageToggle();
+    popupImage.src = image.src;
+    popupImageTitle.textContent = image.alt;
+  });
+})
+
+const closeImagePopup = event => { 
+  if (event.target !== event.currentTarget) return;   
+  popupImageToggle();
+}
+
+const popupImageToggle = () => {
+  popupImageWrap.classList.toggle('popup_opened');
+}
+
+popupImageWrap.addEventListener('click', closeImagePopup);
+popupImageCloseButton.addEventListener('click', closeImagePopup);
 
 

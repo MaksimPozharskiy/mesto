@@ -52,8 +52,8 @@
         <input type="text" class="popup__input popup__input_name_profession" name="profession">
         <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
       </form>
+      <button type="button" class="popup__button-close"></button>
     </div>
-    <button type="button" class="popup__button-close"></button>
   </div>
 
 <!-- Popup add card --> 
@@ -65,9 +65,18 @@
         <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-card" name="link-card">
         <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
       </form>
+      <button type="button" class="popup__button-close"></button>
     </div>
+  </div>
+
+<!-- Popup image -->
+<div class="popup popup_type_image">
+  <div class="popup__wrap">
+    <img src="" alt="" class="popup__image">
+    <p class="popup__title-image"></p>
     <button type="button" class="popup__button-close"></button>
   </div>
+</div>
 
 <!-- Templates -->
   <template id="grid-item">

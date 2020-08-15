@@ -51,3 +51,7 @@
 @import url('../blocks/popup/__input/_name/popup__input_name_profession.css');
 @import url('../blocks/popup/__input/_name/popup__input_name_title-card.css');
 @import url('../blocks/popup/__input/_name/popup__input_name_link-card.css');
+@import url('../blocks/popup/__image/popup__image.css');
+@import url('../blocks/popup/__title-image/popup__title-image.css');
+@import url('../blocks/popup/_type/popup_type_image.css');
+@import url('../blocks/popup/__wrap/popup__wrap.css');

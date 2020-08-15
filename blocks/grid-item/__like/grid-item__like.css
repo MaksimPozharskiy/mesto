@@ -1,14 +1,6 @@
 .grid-item__like {
-  width: 20px;
-  height: 18px;
-
-  background-image: url(../../../images/likeButton.svg) ;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #fff;
-
-  border: none;
-  outline: none;
+  fill: #fff;
+  stroke: #000;
   transition: .2s linear;
 }
 

@@ -1,48 +1,47 @@
 // ==Попап редактирования профиля==
-let profileName = document.querySelector('.profile__name');
-let profileProfession = document.querySelector('.profile__profession');
+const profileName = document.querySelector('.profile__name');
+const profileProfession = document.querySelector('.profile__profession');
 
-let popup = document.querySelector('.popup')
-let popupOpenButton = document.querySelector('.profile__edit-button');
-let popupCloseButton = popup.querySelector('.popup__button-close');
-let popupForm = popup.querySelector('.popup__form');
-let nameInput = popup.querySelector('.popup__input_name_name');
-let professionInput = popup.querySelector('.popup__input_name_profession');
+const popupEdit = document.querySelector('.popup_type_edit')
+const popupEditOpenButton = document.querySelector('.profile__edit-button');
+const popupEditCloseButton = popupEdit.querySelector('.popup__button-close');
+const popupEditForm = popupEdit.querySelector('.popup__form');
+const nameInput = popupEdit.querySelector('.popup__input_name_name');
+const professionInput = popupEdit.querySelector('.popup__input_name_profession');
 
 // Закрытие/открытие попапа по кнопкам
-let popupToggle = () => {
-  popup.classList.toggle('popup_opened');
+const popupEditToggle = () => {
+  popupEdit.classList.toggle('popup_opened');
 }
 
 // Закрытие попапа по клике на оверлей
-let closePopup = (event) => { 
+const closeEditPopup = event => { 
   if (event.target !== event.currentTarget) return;   
-  popupToggle(event);
+  popupEditToggle(event.target);
 }
 
 // Обработчик формы 
-let formSubmitHandler = event => {
+const formEditSubmitHandler = (event) => {
   event.preventDefault();
 
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
 
-  popupToggle();
+  popupEditToggle(popupEdit);
 }
 
 // Функция для изначального заполнения значений полей формы
-let fillValueForm = () => {
-
+const fillValueForm = () => {
   nameInput.value = profileName.textContent;
   professionInput.value =  profileProfession.textContent;
-  popupToggle();
+  popupEditToggle(popupEdit);
 }
 
-popupOpenButton.addEventListener('click', fillValueForm);
-popupCloseButton.addEventListener('click', popupToggle);
-popup.addEventListener('click', closePopup);
+popupEditOpenButton.addEventListener('click', fillValueForm);
+popupEditCloseButton.addEventListener('click', popupEditToggle);
+popupEdit.addEventListener('click', closeEditPopup);
 
-popupForm.addEventListener('submit', formSubmitHandler); // Кнопка "Сохранить"
+popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
 
 // ==Генерация первых 6 карточек из коробки==
 const initialCards =[
@@ -85,6 +84,51 @@ const renderInitialCards = (initialCards) => {
   });
 }
 renderInitialCards(initialCards);
+
+// ==Добавление карточки пользователем==
+const popupAdd = document.querySelector('.popup_type_add')
+const popupAddOpenButton = document.querySelector('.profile__add-button');
+const popupAddCloseButton = popupAdd.querySelector('.popup__button-close');
+const popupAddForm = popupAdd.querySelector('.popup__form');
+const titleCardInput = popupAdd.querySelector('.popup__input_name_title-card');
+const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
+
+const popupAddToggle = () => {
+  popupAdd.classList.toggle('popup_opened');
+}
+
+const closeAddPopup = event => { 
+  if (event.target !== event.currentTarget) return;   
+  popupAddToggle(event.target);
+}
+// Генерация карточки от пользователя
+const renderCard = (titleCard, linkCard) => {
+  const gridCardElement = gridCardTemplate.cloneNode(true);
+  const likeButton = gridCardElement.querySelector('.grid-item__like');
+
+  gridCardElement.querySelector('.grid-item__image').src = linkCard;
+  gridCardElement.querySelector('.grid-item__name').textContent = titleCard;
+  gridPhotos.prepend(gridCardElement);
+
+  likeButton.addEventListener('click', function () {
+    likeButton.classList.toggle('grid-item__like_liked');
+  }) // добавляем слушатель лайка
+}
+
+//Обработчик формы добавления карточки
+
+const formAddSubmitHandler = (event) => {
+  event.preventDefault();
+
+  const titleCard = titleCardInput.value;
+  const linkCard = linkCardInput.value;
+  renderCard(titleCard, linkCard);
+  popupAddToggle(popupAdd);
+}
+popupAddOpenButton.addEventListener('click', popupAddToggle);
+popupAddCloseButton.addEventListener('click', popupAddToggle);
+popupAdd.addEventListener('click', closeAddPopup);
+popupAddForm.addEventListener('submit', formAddSubmitHandler);
 
 // ==Лайкнуть карточку==
 const likeButton = gridPhotos.querySelectorAll('.grid-item__like');

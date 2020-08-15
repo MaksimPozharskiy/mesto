@@ -43,7 +43,8 @@
     </footer>
   </div>
 
-  <div class="popup">
+<!-- Popup edit profile -->
+  <div class="popup popup_type_edit">
     <div class="popup__container">
       <h4 class="popup__title">Редактировать профиль</h4>
       <form class="popup__form" name="editProfile">
@@ -55,8 +56,20 @@
     <button type="button" class="popup__button-close"></button>
   </div>
 
-  <!-- Templates -->
+<!-- Popup add card --> 
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <h4 class="popup__title">Новое место</h4>
+      <form class="popup__form" name="editProfile">
+        <input type="text" placeholder="Название" class="popup__input popup__input_name_title-card" name="title-card">
+        <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-card" name="link-card">
+        <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
+      </form>
+    </div>
+    <button type="button" class="popup__button-close"></button>
+  </div>
 
+<!-- Templates -->
   <template id="grid-item">
     <article class="grid-item">
       <img src="./images/delete-icon.svg" alt="" class="grid-item__delete-icon">

@@ -72,6 +72,7 @@ const initialCards =[
   }
 ]
 
+// Генерация изначальных 6 карточек
 const gridCardTemplate = document.querySelector('#grid-item').content;
 const gridPhotos = document.querySelector('.grid-photos');
 
@@ -86,5 +87,14 @@ const renderInitialCards = (initialCards) => {
 }
 renderInitialCards(initialCards);
 
+// Удаление карточки
+const deleteIcons = document.querySelectorAll('.grid-item__delete-icon');
+
+// На каждую иконку навешиваем событие удаление карточки по клику
+deleteIcons.forEach(icon => {
+  icon.addEventListener('click', function () {
+    icon.closest('.grid-item').remove();
+  });
+})
 
 

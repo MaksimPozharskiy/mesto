@@ -29,6 +29,7 @@
 @import url('../blocks/grid-item/__like/grid-item__like.css');
 @import url('../blocks/grid-item/__name/grid-item__name.css');
 @import url('../blocks/grid-item/__wrap/grid-item__wrap.css');
+@import url('../blocks/grid-item/__delete-icon/grid-item__delete-icon.css');
 
 /* Footer */ 
 

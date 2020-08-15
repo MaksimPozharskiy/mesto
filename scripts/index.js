@@ -1,3 +1,4 @@
+// ==Попап редактирования профиля==
 let profileName = document.querySelector('.profile__name');
 let profileProfession = document.querySelector('.profile__profession');
 
@@ -43,8 +44,7 @@ popup.addEventListener('click', closePopup);
 
 popupForm.addEventListener('submit', formSubmitHandler); // Кнопка "Сохранить"
 
-// Генерация первых 6 карточек из коробки
-
+// ==Генерация первых 6 карточек из коробки==
 const initialCards =[
   {
     name: 'Конь на лугу',
@@ -72,7 +72,6 @@ const initialCards =[
   }
 ]
 
-// Генерация изначальных 6 карточек
 const gridCardTemplate = document.querySelector('#grid-item').content;
 const gridPhotos = document.querySelector('.grid-photos');
 
@@ -87,7 +86,16 @@ const renderInitialCards = (initialCards) => {
 }
 renderInitialCards(initialCards);
 
-// Удаление карточки
+// ==Лайкнуть карточку==
+const likeButton = gridPhotos.querySelectorAll('.grid-item__like');
+// На каждую кнопку лайка навешиваем переключатель модификатора
+likeButton.forEach(likeButton => {
+  likeButton.addEventListener('click', function () {
+    likeButton.classList.toggle('grid-item__like_liked');
+  })
+})
+
+// ==Удаление карточки==
 const deleteIcons = document.querySelectorAll('.grid-item__delete-icon');
 
 // На каждую иконку навешиваем событие удаление карточки по клику

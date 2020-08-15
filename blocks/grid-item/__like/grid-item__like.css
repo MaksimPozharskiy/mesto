@@ -8,8 +8,11 @@
   background-color: #fff;
 
   border: none;
+  outline: none;
+  transition: .2s linear;
 }
 
 .grid-item__like:hover {
+  opacity: .6;
   cursor: pointer;
 }

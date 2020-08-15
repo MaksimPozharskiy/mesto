@@ -27,6 +27,7 @@
 @import url('../blocks/grid-item/grid-item.css');
 @import url('../blocks/grid-item/__image/grid-item__image.css');
 @import url('../blocks/grid-item/__like/grid-item__like.css');
+@import url('../blocks/grid-item/__like/_liked/grid-item__like_liked.css');
 @import url('../blocks/grid-item/__name/grid-item__name.css');
 @import url('../blocks/grid-item/__wrap/grid-item__wrap.css');
 @import url('../blocks/grid-item/__delete-icon/grid-item__delete-icon.css');

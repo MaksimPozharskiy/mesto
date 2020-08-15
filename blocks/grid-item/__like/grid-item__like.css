@@ -9,7 +9,7 @@
 
   border: none;
   outline: none;
-  transition: .2s linear;
+  /* transition: .2s linear; */
   background-color: black;
 }
 

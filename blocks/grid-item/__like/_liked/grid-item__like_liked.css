@@ -1,4 +1,3 @@
 .grid-item__like_liked {
-  background-image: url(../../../../images/likeButton_liked.svg);
-  background-color: red;
+  fill: #000;
 }

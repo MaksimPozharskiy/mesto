@@ -84,7 +84,6 @@ const renderInitialCards = (initialCards) => {
     gridCardElement.querySelector('.grid-item__image').src = card.link;
     gridCardElement.querySelector('.grid-item__image').alt = card.name;
     gridCardElement.querySelector('.grid-item__name').textContent = card.name;
-
     gridPhotosContainer.append(gridCardElement);
     
   });

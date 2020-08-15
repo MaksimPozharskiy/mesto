@@ -112,6 +112,7 @@ const renderCard = (titleCard, linkCard) => {
   const gridCardElement = gridCardTemplate.cloneNode(true);
   const likeButton = gridCardElement.querySelector('.grid-item__like');
   const image = gridCardElement.querySelector('.grid-item__image')
+  const deleteIcon = gridCardElement.querySelector('.grid-item__delete-icon')
 
   image.src = linkCard;
   image.alt = titleCard;
@@ -127,6 +128,10 @@ const renderCard = (titleCard, linkCard) => {
     popupImageToggle(image);
     popupImage.src = image.src;
     popupImageTitle.textContent = image.alt;
+  });
+
+  deleteIcon.addEventListener('click', function () {
+    deleteIcon.closest('.grid-item').remove();
   });
 }
 

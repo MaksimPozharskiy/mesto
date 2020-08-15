@@ -10,6 +10,7 @@
   border: none;
   outline: none;
   transition: .2s linear;
+  background-color: black;
 }
 
 .grid-item__like:hover {

@@ -1,33 +1,52 @@
-// @TODO Хочу сделать одну функцию по открытию и закрытию попапа, что бы на вход 
-// принимала попап и понимала какой надо закрыть. Не получилось сделать такое, скореее всего
-// надо закрытие/открытие переписать с toggle на 2 функции (открытия и закрытия) 
-
+// ____________________________________________________
+// =================== Переменные =====================
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // ==Попап редактирования профиля==
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
-
 const popupEdit = document.querySelector('.popup_type_edit')
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
-const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 const popupEditForm = popupEdit.querySelector('.popup__form');
 const nameInput = popupEdit.querySelector('.popup__input_name_name');
 const professionInput = popupEdit.querySelector('.popup__input_name_profession');
 
+// ==Попап увеличения картинки==
+const gridPhotos = document.querySelectorAll('.grid-item__image');
+const popupImageWrap = document.querySelector('.popup_type_image');
+const popupImage = popupImageWrap.querySelector('.popup__image');
+const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
 
-// Функция открытия попапа
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-}
-// Функция закрытия попапа
+// ==Попап добавления карточки==
+const popupAdd = document.querySelector('.popup_type_add')
+const popupAddOpenButton = document.querySelector('.profile__add-button');
+const popupAddCloseButton = popupAdd.querySelector('.popup__button-close');
+const popupAddForm = popupAdd.querySelector('.popup__form');
+const titleCardInput = popupAdd.querySelector('.popup__input_name_title-card');
+const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
+
+// ==Добавление карточки пользователем==
+const gridCardTemplate = document.querySelector('#grid-item').content;
+const gridPhotosContainer = document.querySelector('.grid-photos');
+
+// ==Кнопки закрытия попапов==
+const popupCloseButtons = document.querySelectorAll('.popup__button-close');
+
+// _________________________________________________
+// =================== Функции =====================
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// ==Функция открытия попапа==
+const openPopup = (popup) => popup.classList.add('popup_opened');
+
+// ==Функция закрытия попапа==
 const closePopup = () => document.querySelector('.popup_opened').classList.remove('popup_opened');
 
-// Закрытие попапа по клике на оверлей
+// ==Закрытие попапа по клике на оверлей==
 const closePopupOverlay = event => { 
   if (event.target !== event.currentTarget) return;   
   closePopup(event.target);
 }
 
-// Обработчик формы редактирования профиля
+// ==Обработчик формы редактирования профиля==
 const formEditSubmitHandler = (event) => {
   event.preventDefault();
 
@@ -37,21 +56,81 @@ const formEditSubmitHandler = (event) => {
   closePopup();
 }
 
+// ==Обработчик формы добавления карточки==
+const formAddSubmitHandler = (event) => {
+  event.preventDefault();
 
+  const titleCard = titleCardInput.value;
+  const linkCard = linkCardInput.value;
+  renderCard(titleCard, linkCard);
+  closePopup();
+  popupAddForm.reset(); // очищаем поля формы для следующего добавления карточки
+}
+
+// ==Генерация карточки==
+const renderCard = (titleCard, linkCard) => {
+  const gridCardElement = gridCardTemplate.cloneNode(true);
+  const likeButton = gridCardElement.querySelector('.grid-item__like');
+  const image = gridCardElement.querySelector('.grid-item__image')
+  const deleteIcon = gridCardElement.querySelector('.grid-item__delete-icon')
+
+  // Создаем содержимое карточки
+  image.src = linkCard;
+  image.alt = titleCard;
+  gridCardElement.querySelector('.grid-item__name').textContent = titleCard;
+  gridPhotosContainer.prepend(gridCardElement);
+
+  // Навешиваем слушатели на кнопки и картинку
+  likeButton.addEventListener('click', function () {
+    likeButton.classList.toggle('grid-item__like_liked');
+  })
+
+  image.addEventListener('click', function () {
+    openPopup(popupImageWrap);
+    popupImage.src = image.src;
+    popupImageTitle.textContent = image.alt;
+  });
+
+  deleteIcon.addEventListener('click', function () {
+    deleteIcon.closest('.grid-item').remove();
+  });
+}
+
+// ____________________________________________________
+// ============== Обработчики событий =================
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// ==Редактирование профиля==
 popupEditOpenButton.addEventListener('click', function() {
   openPopup(popupEdit);
-  //При открытии запонляем форму текущими значениями
+  //При открытии заполняем форму редактирования профиля текущими значениями
   nameInput.value = profileName.textContent;
   professionInput.value =  profileProfession.textContent;
 });
 
+// ==Открытие попапов==
+popupAddOpenButton.addEventListener('click', function() {
+  openPopup(popupAdd);
+})
 
-
-
+// ==Закрытие попапов по оверлею==
 popupEdit.addEventListener('click', closePopupOverlay);
+popupAdd.addEventListener('click', closePopupOverlay);
+popupImageWrap.addEventListener('click', closePopupOverlay);
 
+// ==Навесить на все кнопки закрытия фукционал закрытия==
+popupCloseButtons.forEach(item => {
+  item.addEventListener('click', closePopup);
+})
+
+// ==Обработчик формы редактирования профиля==
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
 
+// ==Обработчик формы добавления карточки==
+popupAddForm.addEventListener('submit', formAddSubmitHandler);
+
+// ____________________________________________________
+// ======== Изначальное состояние страницы ============
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // ==Генерация первых 6 карточек из коробки==
 const initialCards =[
   {
@@ -80,112 +159,7 @@ const initialCards =[
   }
 ]
 
-const gridCardTemplate = document.querySelector('#grid-item').content;
-const gridPhotosContainer = document.querySelector('.grid-photos');
-
-const renderInitialCards = (initialCards) => {
-  initialCards.forEach(card => {
-    const gridCardElement = gridCardTemplate.cloneNode(true);
-    gridCardElement.querySelector('.grid-item__image').src = card.link;
-    gridCardElement.querySelector('.grid-item__image').alt = card.name;
-    gridCardElement.querySelector('.grid-item__name').textContent = card.name;
-    gridPhotosContainer.append(gridCardElement);
-    
-  });
+// Генерация изначальных карточек
+for (i = 0; i < initialCards.length; i++) {
+  renderCard(initialCards[i].name,initialCards[i].link);
 }
-renderInitialCards(initialCards);
-
-// ==Добавление карточки пользователем==
-const popupAdd = document.querySelector('.popup_type_add')
-const popupAddOpenButton = document.querySelector('.profile__add-button');
-const popupAddCloseButton = popupAdd.querySelector('.popup__button-close');
-const popupAddForm = popupAdd.querySelector('.popup__form');
-const titleCardInput = popupAdd.querySelector('.popup__input_name_title-card');
-const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
-
-
-
-// Генерация карточки от пользователя
-const renderCard = (titleCard, linkCard) => {
-  const gridCardElement = gridCardTemplate.cloneNode(true);
-  const likeButton = gridCardElement.querySelector('.grid-item__like');
-  const image = gridCardElement.querySelector('.grid-item__image')
-  const deleteIcon = gridCardElement.querySelector('.grid-item__delete-icon')
-
-  image.src = linkCard;
-  image.alt = titleCard;
-  gridCardElement.querySelector('.grid-item__name').textContent = titleCard;
-  
-  gridPhotosContainer.prepend(gridCardElement);
-
-  likeButton.addEventListener('click', function () {
-    likeButton.classList.toggle('grid-item__like_liked');
-  })
-
-  image.addEventListener('click', function () {
-    openPopup(popupImageWrap);
-    popupImage.src = image.src;
-    popupImageTitle.textContent = image.alt;
-  });
-
-  deleteIcon.addEventListener('click', function () {
-    deleteIcon.closest('.grid-item').remove();
-  });
-}
-
-//Обработчик формы добавления карточки
-
-const formAddSubmitHandler = (event) => {
-  event.preventDefault();
-
-  const titleCard = titleCardInput.value;
-  const linkCard = linkCardInput.value;
-  renderCard(titleCard, linkCard);
-  closePopup();
-}
-popupAddOpenButton.addEventListener('click', function() {
-  openPopup(popupAdd);
-})
-popupAdd.addEventListener('click', closePopupOverlay);
-popupAddForm.addEventListener('submit', formAddSubmitHandler);
-
-// ==Лайкнуть карточку==
-const likeButton = gridPhotosContainer.querySelectorAll('.grid-item__like');
-// На каждую кнопку лайка навешиваем переключатель модификатора
-likeButton.forEach(likeButton => {
-  likeButton.addEventListener('click', function () {
-    likeButton.classList.toggle('grid-item__like_liked');
-  })
-})
-
-// ==Удаление карточки==
-const deleteIcons = document.querySelectorAll('.grid-item__delete-icon');
-
-// На каждую иконку навешиваем событие удаление карточки по клику
-deleteIcons.forEach(icon => {
-  icon.addEventListener('click', function () {
-    icon.closest('.grid-item').remove();
-  });
-})
-
-// ==Попап увеличения картинки==
-const gridPhotos = document.querySelectorAll('.grid-item__image');
-const popupImageWrap = document.querySelector('.popup_type_image');
-const popupImage = popupImageWrap.querySelector('.popup__image');
-const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
-
-
-gridPhotos.forEach(image => {
-  image.addEventListener('click', function () {
-    openPopup(popupImageWrap);
-    popupImage.src = image.src;
-    popupImageTitle.textContent = image.alt;
-  });
-})
-
-popupImageWrap.addEventListener('click', closePopupOverlay);
-
-// Навесить на все кнопки закрытия фукционал закрытия
-popupCloseButtons.forEach(item => {
-  item.addEventListener('click', closePopup);
-})

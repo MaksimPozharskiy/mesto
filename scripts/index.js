@@ -8,42 +8,47 @@ const profileProfession = document.querySelector('.profile__profession');
 
 const popupEdit = document.querySelector('.popup_type_edit')
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
-const popupEditCloseButton = popupEdit.querySelector('.popup__button-close');
+const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 const popupEditForm = popupEdit.querySelector('.popup__form');
 const nameInput = popupEdit.querySelector('.popup__input_name_name');
 const professionInput = popupEdit.querySelector('.popup__input_name_profession');
 
-// Закрытие/открытие попапа по кнопкам
-const popupEditToggle = () => {
-  popupEdit.classList.toggle('popup_opened');
+
+// Функция открытия попапа
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
 }
+// Функция закрытия попапа
+const closePopup = () => document.querySelector('.popup_opened').classList.remove('popup_opened');
 
 // Закрытие попапа по клике на оверлей
-const closeEditPopup = event => { 
+const closePopupOverlay = event => { 
   if (event.target !== event.currentTarget) return;   
-  popupEditToggle(event.target);
+  closePopup(event.target);
 }
 
-// Обработчик формы 
+// Обработчик формы редактирования профиля
 const formEditSubmitHandler = (event) => {
   event.preventDefault();
 
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
 
-  popupEditToggle(popupEdit);
+  closePopup();
 }
 
-// Функция для изначального заполнения значений полей формы
-const fillValueForm = () => {
+
+popupEditOpenButton.addEventListener('click', function() {
+  openPopup(popupEdit);
+  //При открытии запонляем форму текущими значениями
   nameInput.value = profileName.textContent;
   professionInput.value =  profileProfession.textContent;
-  popupEditToggle(popupEdit);
-}
+});
 
-popupEditOpenButton.addEventListener('click', fillValueForm);
-popupEditCloseButton.addEventListener('click', popupEditToggle);
-popupEdit.addEventListener('click', closeEditPopup);
+
+
+
+popupEdit.addEventListener('click', closePopupOverlay);
 
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
 
@@ -98,14 +103,8 @@ const popupAddForm = popupAdd.querySelector('.popup__form');
 const titleCardInput = popupAdd.querySelector('.popup__input_name_title-card');
 const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
 
-const popupAddToggle = () => {
-  popupAdd.classList.toggle('popup_opened');
-}
 
-const closeAddPopup = event => { 
-  if (event.target !== event.currentTarget) return;   
-  popupAddToggle(event.target);
-}
+
 // Генерация карточки от пользователя
 const renderCard = (titleCard, linkCard) => {
   const gridCardElement = gridCardTemplate.cloneNode(true);
@@ -124,7 +123,7 @@ const renderCard = (titleCard, linkCard) => {
   })
 
   image.addEventListener('click', function () {
-    popupImageToggle(image);
+    openPopup(popupImageWrap);
     popupImage.src = image.src;
     popupImageTitle.textContent = image.alt;
   });
@@ -142,11 +141,12 @@ const formAddSubmitHandler = (event) => {
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
   renderCard(titleCard, linkCard);
-  popupAddToggle(popupAdd);
+  closePopup();
 }
-popupAddOpenButton.addEventListener('click', popupAddToggle);
-popupAddCloseButton.addEventListener('click', popupAddToggle);
-popupAdd.addEventListener('click', closeAddPopup);
+popupAddOpenButton.addEventListener('click', function() {
+  openPopup(popupAdd);
+})
+popupAdd.addEventListener('click', closePopupOverlay);
 popupAddForm.addEventListener('submit', formAddSubmitHandler);
 
 // ==Лайкнуть карточку==
@@ -173,26 +173,19 @@ const gridPhotos = document.querySelectorAll('.grid-item__image');
 const popupImageWrap = document.querySelector('.popup_type_image');
 const popupImage = popupImageWrap.querySelector('.popup__image');
 const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
-const popupImageCloseButton = popupImageWrap.querySelector('.popup__button-close');
+
 
 gridPhotos.forEach(image => {
   image.addEventListener('click', function () {
-    popupImageToggle();
+    openPopup(popupImageWrap);
     popupImage.src = image.src;
     popupImageTitle.textContent = image.alt;
   });
 })
 
-const closeImagePopup = event => { 
-  if (event.target !== event.currentTarget) return;   
-  popupImageToggle();
-}
+popupImageWrap.addEventListener('click', closePopupOverlay);
 
-const popupImageToggle = () => {
-  popupImageWrap.classList.toggle('popup_opened');
-}
-
-popupImageWrap.addEventListener('click', closeImagePopup);
-popupImageCloseButton.addEventListener('click', closeImagePopup);
-
-
+// Навесить на все кнопки закрытия фукционал закрытия
+popupCloseButtons.forEach(item => {
+  item.addEventListener('click', closePopup);
+})

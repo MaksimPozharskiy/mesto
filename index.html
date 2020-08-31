@@ -48,7 +48,7 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <h4 class="popup__title">Редактировать профиль</h4>
-      <form class="popup__form" name="editProfile">
+      <form class="popup__form" name="editProfile" novalidate>
         <input minlength="2" maxlength="40" type="text" class="popup__input popup__input_name_name" name="name" id="name-input" required>
         <span class='popup__input-error' id='name-input-error'></span>
         <input minlength="2" maxlength="200" type="text" class="popup__input popup__input_name_profession" name="profession" id="profession-input" required>
@@ -63,7 +63,7 @@
   <div class="popup popup_type_add">
     <div class="popup__container">
       <h4 class="popup__title">Новое место</h4>
-      <form class="popup__form" name="addCard">
+      <form class="popup__form" name="addCard" novalidate>
         <input minlength="1" maxlength="30" type="text" placeholder="Название" class="popup__input popup__input_name_title-card" name="title-card" id="title-input" required>
         <span class='popup__input-error' id='title-input-error'>Вы пропустили это поле.</span>
         <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-card" name="link-card" id="link-input" required>

@@ -49,8 +49,10 @@
     <div class="popup__container">
       <h4 class="popup__title">Редактировать профиль</h4>
       <form class="popup__form" name="editProfile">
-        <input type="text" class="popup__input popup__input_name_name" name="name" required>
-        <input type="text" class="popup__input popup__input_name_profession" name="profession" required>
+        <input type="text" class="popup__input popup__input_name_name" name="name" id="name-input" required>
+        <span class='popup__input-error' id='name-input-error'></span>
+        <input type="text" class="popup__input popup__input_name_profession" name="profession" id="profession-input" required>
+        <span class='popup__input-error' id='profession-input-error'></span>
         <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
       </form>
       <button type="button" class="popup__button-close"></button>
@@ -61,10 +63,12 @@
   <div class="popup popup_type_add">
     <div class="popup__container">
       <h4 class="popup__title">Новое место</h4>
-      <form class="popup__form" name="editProfile">
-        <input type="text" placeholder="Название" class="popup__input popup__input_name_title-card" name="title-card" required>
-        <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-card" name="link-card" required>
-        <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
+      <form class="popup__form" name="addCard">
+        <input type="text" placeholder="Название" class="popup__input popup__input_name_title-card" name="title-card" id="title-input" required>
+        <span class='popup__input-error' id='title-input-error'>Вы пропустили это поле.</span>
+        <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-card" name="link-card" id="link-input" required>
+        <span class='popup__input-error' id='link-input-error'>Вы пропустили это поле.</span>
+        <input type="submit" class="popup__button-save" value="Создать" name="submit">
       </form>
       <button type="button" class="popup__button-close"></button>
     </div>
@@ -94,5 +98,6 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>

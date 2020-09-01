@@ -31,9 +31,6 @@ const gridPhotosContainer = document.querySelector('.grid-photos');
 // ==Кнопки закрытия попапов==
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 
-// ==Все попыпы на странице==
-const popupList = document.querySelectorAll('.popup');
-
 // _________________________________________________
 // =================== Функции =====================
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾

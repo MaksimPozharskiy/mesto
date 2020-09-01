@@ -49,6 +49,7 @@ const toggleButtonState = (inputList, submitButtonSelector, {inactiveButtonClass
   }
 }
 
+//Функция для навешивания событий на все формы
 const setEventListeners = (form, {inputSelector, submitButtonSelector}) => {
   const inputList = Array.from(form.querySelectorAll(inputSelector));
   const submitButton = form.querySelector(submitButtonSelector);
@@ -63,7 +64,7 @@ const setEventListeners = (form, {inputSelector, submitButtonSelector}) => {
     });
   });
 }
-
+// Валидация
 const enableValidation = ({formSelector}) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((item) => {
@@ -77,5 +78,5 @@ const enableValidation = ({formSelector}) => {
   });
 }
 
-// При вызове функция принимает объект настрое форм на странице
+// При вызове функция принимает объект настроек форм на странице
 enableValidation(settingsForm);

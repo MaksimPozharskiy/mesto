@@ -31,6 +31,9 @@ const gridPhotosContainer = document.querySelector('.grid-photos');
 // ==Кнопки закрытия попапов==
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 
+// ==Все попыпы на странице==
+const popupList = document.querySelectorAll('.popup');
+
 // _________________________________________________
 // =================== Функции =====================
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -127,6 +130,13 @@ popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка
 
 // ==Обработчик формы добавления карточки==
 popupAddForm.addEventListener('submit', formAddSubmitHandler);
+
+// ==Обработчик закрытия формы по Ecs==
+document.addEventListener('keydown', function(evt) {
+  if (evt.keyCode === 27 && document.querySelector('.popup_opened')) {
+    closePopup();
+  }
+})
 
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============

@@ -35,7 +35,17 @@ const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 // =================== Функции =====================
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // ==Функция открытия попапа==
-const openPopup = (popup) => popup.classList.add('popup_opened');
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  popup.parentNode.addEventListener('keydown', closePopupEscKey);
+}
+
+// ==Функция закрытия попапа по нажатию Esc==
+const closePopupEscKey = (evt) => {
+  if (evt.keyCode === 27) {
+    closePopup();
+  }
+}
 
 // ==Функция закрытия попапа==
 const closePopup = () => document.querySelector('.popup_opened').classList.remove('popup_opened');
@@ -129,11 +139,7 @@ popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка
 popupAddForm.addEventListener('submit', formAddSubmitHandler);
 
 // ==Обработчик закрытия формы по Ecs==
-document.addEventListener('keydown', function(evt) {
-  if (evt.keyCode === 27 && document.querySelector('.popup_opened')) {
-    closePopup();
-  }
-})
+
 
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============

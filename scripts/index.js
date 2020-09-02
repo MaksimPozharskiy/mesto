@@ -43,7 +43,7 @@ const closePopup = () => document.querySelector('.popup_opened').classList.remov
 // ==Закрытие попапа по клике на оверлей==
 const closePopupOverlay = event => { 
   if (event.target !== event.currentTarget) return;   
-  closePopup(event.target);
+  closePopup();
 }
 
 // ==Обработчик формы редактирования профиля==

@@ -43,6 +43,7 @@ const openPopup = (popup) => {
 // ==Функция закрытия попапа по нажатию Esc==
 const closePopupEscKey = (evt) => {
   if (evt.keyCode === 27) {
+    document.querySelector('.popup_opened').parentNode.removeEventListener('keydown', closePopupEscKey);
     closePopup();
   }
 }

@@ -6,8 +6,8 @@ export default class Card {
   }
 
 
-  _likeCardHundler() {
-    
+  _likeCardHundler = () => {
+    this._likeButton.classList.toggle('grid-item__like_liked');
   }
 
   _openPopupHundler = () => {
@@ -32,7 +32,7 @@ export default class Card {
     // Навешиваем обработчики
     this._deleteIcon.addEventListener('click', this._deleteCardHundler);
     this._image.addEventListener('click', this._openPopupHundler);
-
+    this._likeButton.addEventListener('click', this._likeCardHundler);
     container.prepend(this._view);
   }
 }

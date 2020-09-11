@@ -13,9 +13,9 @@ import Card from './Card.js';
 
 // // ==Попап увеличения картинки==
 // const gridPhotos = document.querySelectorAll('.grid-item__image');
-const popupImageWrap = document.querySelector('.popup_type_image');
-const popupImage = popupImageWrap.querySelector('.popup__image');
-const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
+// const popupImageWrap = document.querySelector('.popup_type_image');
+// const popupImage = popupImageWrap.querySelector('.popup__image');
+// const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
 
 // // ==Попап добавления карточки==
 // const popupAdd = document.querySelector('.popup_type_add')
@@ -36,11 +36,11 @@ const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
 // // =================== Функции =====================
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // ==Функция открытия попапа==
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  popup.parentNode.addEventListener('keydown', closePopupEscKey);
-  console.log(1);
-}
+// const openPopup = (popup) => {
+//   popup.classList.add('popup_opened');
+//   popup.parentNode.addEventListener('keydown', closePopupEscKey);
+//   console.log(1);
+// }
 
 // // ==Функция закрытия попапа по нажатию Esc==
 // const closePopupEscKey = (evt) => {
@@ -174,7 +174,6 @@ const initialCards =[
     link: './images/santiago-martin-7NC_LcUaky8-unsplash.jpg'
   }
 ]
-
 
 // Генерация изначальных карточек
 const container = document.querySelector('.grid-photos');

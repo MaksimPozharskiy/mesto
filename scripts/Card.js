@@ -1,3 +1,5 @@
+// @TODO Избавиться от зависимости (вроде в следующем спринте будем делать отдельный класс Popup)
+import {openPopup, popupImageWrap} from './utils.js';
 export default class Card {
   constructor(titleCard, linkCard, templateSelector) {
     this._titleCard = titleCard;
@@ -5,13 +7,12 @@ export default class Card {
     this._templateSelector = templateSelector;
   }
 
-
   _likeCardHundler = () => {
     this._likeButton.classList.toggle('grid-item__like_liked');
   }
 
   _openPopupHundler = () => {
-    
+    openPopup(popupImageWrap);
   }
 
   _deleteCardHundler = () => {
@@ -33,6 +34,7 @@ export default class Card {
     this._deleteIcon.addEventListener('click', this._deleteCardHundler);
     this._image.addEventListener('click', this._openPopupHundler);
     this._likeButton.addEventListener('click', this._likeCardHundler);
+
     container.prepend(this._view);
   }
 }

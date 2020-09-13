@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 // // ____________________________________________________
 // // =================== Переменные =====================
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -175,8 +176,29 @@ const initialCards =[
   }
 ]
 
+const settingsForm = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
 // Генерация изначальных карточек
 const container = document.querySelector('.grid-photos');
 for (let i = 0; i < initialCards.length; i++) {
   new Card(initialCards[i].name, initialCards[i].link, '#grid-item').render(container);
 }
+
+const popupEdit = document.querySelector('.popup_type_edit')
+const popupEditForm = popupEdit.querySelector('.popup__form');
+
+const EditFormValidator = new FormValidator(settingsForm, popupEditForm);
+EditFormValidator.enableValidation();
+
+// ==Попап добавления карточки==
+const popupAdd = document.querySelector('.popup_type_add')
+const popupAddForm = popupAdd.querySelector('.popup__form');
+const AddFormValidator = new FormValidator(settingsForm, popupAddForm);
+AddFormValidator.enableValidation();
+

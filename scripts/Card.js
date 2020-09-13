@@ -1,5 +1,5 @@
 // @TODO Избавиться от зависимости (вроде в следующем спринте будем делать отдельный класс Popup)
-import {openPopup, popupImageWrap, fillPopupImage} from './utils.js';
+import {openPopup, popupImageWrap, fillPopupImage} from './index.js';
 
 export default class Card {
   constructor(titleCard, linkCard, templateSelector) {

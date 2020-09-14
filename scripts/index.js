@@ -37,6 +37,11 @@ const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 // // _________________________________________________
 // // =================== Функции =====================
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// ==Функция определения открытого попапа==
+const findOpenPopup = () => {
+  return document.querySelector('.popup_opened');
+}
+
 // ==Функция открытия попапа==
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -44,20 +49,23 @@ const openPopup = (popup) => {
 }
 
 // ==Функция закрытия попапа по нажатию Esc==
-const closePopupEscKey = (evt) => {
-  if (evt.keyCode === 27) {
-    document.querySelector('.popup_opened').parentNode.removeEventListener('keydown', closePopupEscKey);
-    closePopup();
+const closePopupEscKey = (event) => {
+
+  if (event.keyCode === 27) {
+    findOpenPopup().parentNode.removeEventListener('keydown', closePopupEscKey);
+    closePopup(findOpenPopup());
   }
 }
 
 // ==Функция закрытия попапа==
-const closePopup = () => document.querySelector('.popup_opened').classList.remove('popup_opened');
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+}
 
 // ==Закрытие попапа по клике на оверлей==
 const closePopupOverlay = event => { 
   if (event.target !== event.currentTarget) return;   
-  closePopup();
+  closePopup(findOpenPopup());
 }
 
 // // ==Обработчик формы редактирования профиля==
@@ -67,7 +75,7 @@ const formEditSubmitHandler = (event) => {
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
 
-  closePopup();
+  closePopup(findOpenPopup());
 }
 
 // ==Функция создания попапа с увеличеной картинкой==
@@ -83,7 +91,7 @@ const formAddSubmitHandler = (event) => {
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
   new Card(titleCard, linkCard, '#grid-item').render(container);
-  closePopup();
+  closePopup(findOpenPopup());
   popupAddForm.reset(); // очищаем поля формы для следующего добавления карточки
 }
 

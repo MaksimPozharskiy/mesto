@@ -33,6 +33,7 @@ const gridPhotosContainer = document.querySelector('.grid-photos');
 
 // ==Кнопки закрытия попапов==
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
+const keyCodeEsc = 27;
 
 // // _________________________________________________
 // // =================== Функции =====================
@@ -53,7 +54,7 @@ const openPopup = (popup) => {
 
 // ==Функция закрытия попапа по нажатию Esc==
 const closePopupEscKey = (event) => {
-  if (event.keyCode === 27) {
+  if (event.keyCode === keyCodeEsc) {
     findOpenPopup().parentNode.removeEventListener('keydown', closePopupEscKey);
     closePopup(findOpenPopup());
   }

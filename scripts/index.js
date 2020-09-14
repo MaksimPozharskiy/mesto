@@ -46,11 +46,13 @@ const findOpenPopup = () => {
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   popup.parentNode.addEventListener('keydown', closePopupEscKey);
+  popup.querySelector('.popup__button-close').addEventListener('click', () => {
+    closePopup(findOpenPopup()); //Выбираем кнопку открытого попапа и вешаем события закрытия на крестик
+  })
 }
 
 // ==Функция закрытия попапа по нажатию Esc==
 const closePopupEscKey = (event) => {
-
   if (event.keyCode === 27) {
     findOpenPopup().parentNode.removeEventListener('keydown', closePopupEscKey);
     closePopup(findOpenPopup());
@@ -115,11 +117,6 @@ popupAddOpenButton.addEventListener('click', function() {
 popupEdit.addEventListener('click', closePopupOverlay);
 popupAdd.addEventListener('click', closePopupOverlay);
 popupImageWrap.addEventListener('click', closePopupOverlay);
-
-// ==Навесить на все кнопки закрытия фукционал закрытия==
-popupCloseButtons.forEach(item => {
-  item.addEventListener('click', closePopup);
-})
 
 // ==Обработчик формы редактирования профиля==
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"

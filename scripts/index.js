@@ -28,7 +28,7 @@ const titleCardInput = popupAdd.querySelector('.popup__input_name_title-card');
 const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
 
 // ==Добавление карточки пользователем==
-const gridCardTemplate = document.querySelector('#grid-item').content;
+const gridCardTemplateId = '#grid-item';
 const gridPhotosContainer = document.querySelector('.grid-photos');
 
 // ==Кнопки закрытия попапов==
@@ -154,6 +154,13 @@ const initialCards =[
     link: './images/santiago-martin-7NC_LcUaky8-unsplash.jpg'
   }
 ]
+
+// Генерация изначальных карточек
+const container = document.querySelector('.grid-photos');
+initialCards.forEach(item => {
+  new Card(item.name, item.link, gridCardTemplateId).render(container);
+})
+
 // Настройки валидации
 const settingsForm = {
   formSelector: '.popup__form',
@@ -163,16 +170,11 @@ const settingsForm = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 }
-// Генерация изначальных карточек
-const container = document.querySelector('.grid-photos');
-for (let i = 0; i < initialCards.length; i++) {
-  new Card(initialCards[i].name, initialCards[i].link, '#grid-item').render(container);
-}
 
 // Включаем валидацию формы редактрования профиля
-const EditFormValidator = new FormValidator(settingsForm, popupEditForm);
-EditFormValidator.enableValidation();
+const editFormValidator = new FormValidator(settingsForm, popupEditForm);
+editFormValidator.enableValidation();
 
 // Включаем валидацию формы добавления карточки
-const AddFormValidator = new FormValidator(settingsForm, popupAddForm);
-AddFormValidator.enableValidation();
+const addFormValidator = new FormValidator(settingsForm, popupAddForm);
+addFormValidator.enableValidation();

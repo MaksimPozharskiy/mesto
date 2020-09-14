@@ -46,7 +46,7 @@ const findOpenPopup = () => {
 // ==Функция открытия попапа==
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
-  popup.parentNode.addEventListener('keydown', closePopupEscKey);
+  document.addEventListener('keydown', closePopupEscKey);
   popup.querySelector('.popup__button-close').addEventListener('click', () => {
     closePopup(findOpenPopup()); //Выбираем кнопку открытого попапа и вешаем события закрытия на крестик
   })
@@ -55,7 +55,7 @@ const openPopup = (popup) => {
 // ==Функция закрытия попапа по нажатию Esc==
 const closePopupEscKey = (event) => {
   if (event.keyCode === keyCodeEsc) {
-    findOpenPopup().parentNode.removeEventListener('keydown', closePopupEscKey);
+    document.removeEventListener('keydown', closePopupEscKey);
     closePopup(findOpenPopup());
   }
 }

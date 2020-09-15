@@ -67,8 +67,8 @@ const closePopupEscKey = (event) => {
 // ==Функция закрытия попапа==
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
-  // удаляем слушатель с кнопки закрытия открытого ранее попапа
-  popupCloseButton.removeEventListener('click', closePopupCross);
+  popupCloseButton.removeEventListener('click', closePopupCross);// удаляем слушатель с кнопки закрытия открытого ранее попапа
+  popup.removeEventListener('click', closePopupOverlay);
 }
 
 // ==Закрытие попапа по клике на оверлей==
@@ -121,9 +121,9 @@ popupAddOpenButton.addEventListener('click', function() {
 })
 
 // ==Закрытие попапов по оверлею==
-popupEdit.addEventListener('click', closePopupOverlay);
-popupAdd.addEventListener('click', closePopupOverlay);
-popupImageWrap.addEventListener('click', closePopupOverlay);
+// popupEdit.addEventListener('click', closePopupOverlay);
+// popupAdd.addEventListener('click', closePopupOverlay);
+// popupImageWrap.addEventListener('click', closePopupOverlay);
 
 // ==Обработчик формы редактирования профиля==
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"

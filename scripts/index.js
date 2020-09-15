@@ -104,7 +104,7 @@ const formAddSubmitHandler = (event) => {
   const linkCard = linkCardInput.value;
   new Card(titleCard, linkCard, '#grid-item').render(container);
   closePopup(findOpenPopup());
-  popupAddForm.reset(popupEditForm); // очищаем поля формы для следующего добавления карточки
+  
 }
 
 // ____________________________________________________

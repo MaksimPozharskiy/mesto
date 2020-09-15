@@ -64,6 +64,8 @@ export default class FormValidator {
   }
 
   //Функция для сброса формы
+    // Это ужасный метод, но за 4 часа это единственное рабочее что получилось:( у меня много ошибок, буду рефакторить на след итерации
+    //@TODO Сделать из этого нормальный метод
   resetForm = () => {
   const inputList = Array.from(this._formElement.querySelectorAll('*'));
   inputList.forEach((inputItem) => { //@TODO сделать сброс классов более точечно, не для всех элементов массива
@@ -72,6 +74,8 @@ export default class FormValidator {
     inputItem.classList.remove(this._inputErrorClass);
   })
   this._formElement.reset();
+  this._formElement.querySelector(this._submitButtonSelector).classList.add(this._inactiveButtonClass);
+  this._formElement.querySelector(this._submitButtonSelector).setAttribute('disabled', '');
 }
   // Валидация
   enableValidation = () => {

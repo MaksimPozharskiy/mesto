@@ -34,7 +34,7 @@ const gridPhotosContainer = document.querySelector('.grid-photos');
 // ==Кнопки закрытия попапов==
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 const keyCodeEsc = 27;
-
+let popupCloseButton;
 // // _________________________________________________
 // // =================== Функции =====================
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -42,14 +42,18 @@ const keyCodeEsc = 27;
 const findOpenPopup = () => {
   return document.querySelector('.popup_opened');
 }
-
+const closePopupCross = () => {
+  closePopup(findOpenPopup())
+}
 // ==Функция открытия попапа==
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEscKey);
-  popup.querySelector('.popup__button-close').addEventListener('click', () => {
-    closePopup(findOpenPopup()); //Выбираем кнопку открытого попапа и вешаем события закрытия на крестик
-  })
+  // Определяем кнопку закрытия открытого попапа и вешаем слушатель
+  popupCloseButton = popup.querySelector('.popup__button-close');
+  popupCloseButton.addEventListener('click', closePopupCross);
+
+  popup.addEventListener('click', closePopupOverlay);
 }
 
 // ==Функция закрытия попапа по нажатию Esc==
@@ -63,6 +67,8 @@ const closePopupEscKey = (event) => {
 // ==Функция закрытия попапа==
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  // удаляем слушатель с кнопки закрытия открытого ранее попапа
+  popupCloseButton.removeEventListener('click', closePopupCross);
 }
 
 // ==Закрытие попапа по клике на оверлей==

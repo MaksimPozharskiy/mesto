@@ -42,6 +42,7 @@ let popupCloseButton;
 const findOpenPopup = () => {
   return document.querySelector('.popup_opened');
 }
+// ==Функция закрытия попапа по кнопке крестика==
 const closePopupCross = () => {
   closePopup(findOpenPopup())
 }
@@ -54,6 +55,8 @@ const openPopup = (popup) => {
   popupCloseButton.addEventListener('click', closePopupCross);
 
   popup.addEventListener('click', closePopupOverlay);
+  editFormValidator.resetForm();
+  addFormValidator.resetForm();
 }
 
 // ==Функция закрытия попапа по нажатию Esc==
@@ -101,7 +104,7 @@ const formAddSubmitHandler = (event) => {
   const linkCard = linkCardInput.value;
   new Card(titleCard, linkCard, '#grid-item').render(container);
   closePopup(findOpenPopup());
-  popupAddForm.reset(); // очищаем поля формы для следующего добавления карточки
+  popupAddForm.reset(popupEditForm); // очищаем поля формы для следующего добавления карточки
 }
 
 // ____________________________________________________

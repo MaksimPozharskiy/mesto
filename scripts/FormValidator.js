@@ -62,6 +62,17 @@ export default class FormValidator {
     });
     
   }
+
+  //Функция для сброса формы
+  resetForm = () => {
+  const inputList = Array.from(this._formElement.querySelectorAll('*'));
+  inputList.forEach((inputItem) => { //@TODO сделать сброс классов более точечно, не для всех элементов массива
+    inputItem.textContent = "";
+    inputItem.classList.remove(this._errorClass);
+    inputItem.classList.remove(this._inputErrorClass);
+  })
+  this._formElement.reset();
+}
   // Валидация
   enableValidation = () => {
     this._formElement.addEventListener('submit', (evt) => {

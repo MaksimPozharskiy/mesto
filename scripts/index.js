@@ -2,7 +2,6 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import {initialCards} from './initial-cards.js';
 import {settingsForm} from './constants.js';
-export {openPopup, popupImageWrap, fillPopupImage};
 // // ____________________________________________________
 // // =================== Переменные =====================
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -137,10 +136,8 @@ popupAddForm.addEventListener('submit', formAddSubmitHandler);
 // Генерация изначальных карточек
 const container = document.querySelector('.grid-photos');
 initialCards.forEach(item => {
-  new Card(item.name, item.link, gridCardTemplateId).renderCard(container);
+  new Card(item.name, item.link, gridCardTemplateId, openPopup, popupImageWrap, fillPopupImage).renderCard(container);
 })
-
-
 
 // Включаем валидацию формы редактрования профиля
 const editFormValidator = new FormValidator(settingsForm, popupEditForm);

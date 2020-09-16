@@ -1,11 +1,11 @@
-// @TODO Избавиться от зависимости (вроде в следующем спринте будем делать отдельный класс Popup)
-import {openPopup, popupImageWrap, fillPopupImage} from './index.js';
-
 export default class Card {
-  constructor(titleCard, linkCard, templateSelector) {
+  constructor(titleCard, linkCard, templateSelector, openPopup, popupImageWrap, fillPopupImage ) {
     this._titleCard = titleCard;
     this._linkCard = linkCard;
     this._templateSelector = templateSelector;
+    this._openPopup = openPopup;
+    this._popupImageWrap = popupImageWrap;
+    this._fillPopupImage = fillPopupImage;
   }
 
   _likeCardHundler = () => {
@@ -13,8 +13,8 @@ export default class Card {
   }
 
   _openPopupHundler = () => {
-    openPopup(popupImageWrap);
-    fillPopupImage(this._image);
+    this._openPopup(this._popupImageWrap);
+    this._fillPopupImage(this._image);
   }
 
   _deleteCardHundler = () => {

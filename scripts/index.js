@@ -102,7 +102,7 @@ const formAddSubmitHandler = (event) => {
 
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
-  new Card(titleCard, linkCard, '#grid-item').render(container);
+  new Card(titleCard, linkCard, '#grid-item').renderCard(container);
   closePopup(findOpenPopup());
   
 }
@@ -168,7 +168,7 @@ const initialCards =[
 // Генерация изначальных карточек
 const container = document.querySelector('.grid-photos');
 initialCards.forEach(item => {
-  new Card(item.name, item.link, gridCardTemplateId).render(container);
+  new Card(item.name, item.link, gridCardTemplateId).renderCard(container);
 })
 
 // Настройки валидации

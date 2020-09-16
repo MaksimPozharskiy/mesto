@@ -21,7 +21,13 @@ export default class Card {
     this._deleteIcon.closest('.grid-item').remove();
   }
 
-  render(container) {
+  _setEventListeners = () => {
+    this._deleteIcon.addEventListener('click', this._deleteCardHundler);
+    this._image.addEventListener('click', this._openPopupHundler);
+    this._likeButton.addEventListener('click', this._likeCardHundler);
+  }
+
+  _generateCard(container) {
     //Формируем шаблон карточки
     this._template = document.querySelector(this._templateSelector).content;
     this._view = this._template.cloneNode(true);
@@ -32,12 +38,13 @@ export default class Card {
     this._image.src = this._linkCard;
     this._image.alt = this._titleCard;
     this._view.querySelector('.grid-item__name').textContent = this._titleCard;
-    // Навешиваем обработчики
-    this._deleteIcon.addEventListener('click', this._deleteCardHundler);
-    this._image.addEventListener('click', this._openPopupHundler);
-    this._likeButton.addEventListener('click', this._likeCardHundler);
+    this._setEventListeners();
 
-    container.prepend(this._view);
+    // Возвращаем готовую карточку
+    return this._view;
+  }
+  renderCard = (container) => {
+    container.prepend(this._generateCard(container));
   }
 }
 

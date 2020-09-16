@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import {initialCards} from './initial-cards.js';
 export {openPopup, popupImageWrap, fillPopupImage};
 // // ____________________________________________________
 // // =================== Переменные =====================
@@ -123,11 +124,6 @@ popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
 })
 
-// ==Закрытие попапов по оверлею==
-// popupEdit.addEventListener('click', closePopupOverlay);
-// popupAdd.addEventListener('click', closePopupOverlay);
-// popupImageWrap.addEventListener('click', closePopupOverlay);
-
 // ==Обработчик формы редактирования профиля==
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
 
@@ -137,34 +133,6 @@ popupAddForm.addEventListener('submit', formAddSubmitHandler);
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-// ==Генерация первых 6 карточек из коробки==
-const initialCards =[
-  {
-    name: 'Конь на лугу',
-    link: './images/kate-nesmieian-rRXUtG1Kbqs-unsplash.jpg'
-  },
-  {
-    name: 'Лошадки',
-    link: './images/mark-neal-Am8FAT_PoJM-unsplash.jpg'
-  },
-  {
-    name: 'Милая лошадь',
-    link: './images/navid-bazari-Vw4oefoH4Iw-unsplash.jpg'
-  },
-  {
-    name: 'Разговор коней',
-    link: './images/raphael-wicker-P6JRr7-FxLw-unsplash.jpg'
-  },
-  {
-    name: 'Утренний завтрак',
-    link: './images/rich-dahlgren--MMRAIrqgUE-unsplash.jpg'
-  },
-  {
-    name: 'Внимательный конь',
-    link: './images/santiago-martin-7NC_LcUaky8-unsplash.jpg'
-  }
-]
-
 // Генерация изначальных карточек
 const container = document.querySelector('.grid-photos');
 initialCards.forEach(item => {

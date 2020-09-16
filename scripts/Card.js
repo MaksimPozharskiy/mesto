@@ -43,6 +43,7 @@ export default class Card {
     // Возвращаем готовую карточку
     return this._view;
   }
+  
   renderCard = (container) => {
     container.prepend(this._generateCard(container));
   }

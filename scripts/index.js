@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import {initialCards} from './initial-cards.js';
+import {settingsForm} from './constants.js';
 export {openPopup, popupImageWrap, fillPopupImage};
 // // ____________________________________________________
 // // =================== Переменные =====================
@@ -139,15 +140,7 @@ initialCards.forEach(item => {
   new Card(item.name, item.link, gridCardTemplateId).renderCard(container);
 })
 
-// Настройки валидации
-const settingsForm = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-}
+
 
 // Включаем валидацию формы редактрования профиля
 const editFormValidator = new FormValidator(settingsForm, popupEditForm);

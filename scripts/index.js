@@ -103,7 +103,7 @@ const formAddSubmitHandler = (event) => {
 
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
-  new Card(titleCard, linkCard, '#grid-item').renderCard(container);
+  new Card(titleCard, linkCard, gridCardTemplateId).renderCard(container);
   closePopup(findOpenPopup());
   
 }

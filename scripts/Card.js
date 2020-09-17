@@ -8,7 +8,7 @@ export default class Card {
     this._fillPopupImage = fillPopupImage;
   }
 
-  _likeCardHundler = () => {
+  _likeCardHandler = () => {
     this._likeButton.classList.toggle('grid-item__like_liked');
   }
 
@@ -24,7 +24,7 @@ export default class Card {
   _setEventListeners = () => {
     this._deleteIcon.addEventListener('click', this._deleteCardHundler);
     this._image.addEventListener('click', this._openPopupHundler);
-    this._likeButton.addEventListener('click', this._likeCardHundler);
+    this._likeButton.addEventListener('click', this._likeCardHandler);
   }
 
   _generateCard(container) {

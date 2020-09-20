@@ -28,7 +28,6 @@ import {openPopup,
         titleCardInput,
         linkCardInput,
         gridCardTemplateId,
-        gridPhotosContainer,
         keyCodeEsc,
         container} from './utils.js';
 

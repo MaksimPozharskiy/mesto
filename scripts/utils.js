@@ -28,7 +28,6 @@ const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
 
 // ==Добавление карточки пользователем==
 const gridCardTemplateId = '#grid-item';
-const gridPhotosContainer = document.querySelector('.grid-photos');
 
 // ==Кнопки закрытия попапов==
 const keyCodeEsc = 27;
@@ -109,7 +108,6 @@ export {
   titleCardInput,
   linkCardInput,
   gridCardTemplateId,
-  gridPhotosContainer,
   keyCodeEsc,
   container
   }

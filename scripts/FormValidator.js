@@ -5,6 +5,7 @@ export default class FormValidator {
     this._submitButtonSelector = settingsForm.submitButtonSelector
     this._inactiveButtonClass = settingsForm.inactiveButtonClass
     this._inputErrorClass = settingsForm.inputErrorClass
+    this._promptErrorSelector = settingsForm.promptErrorSelector
     this._errorClass = settingsForm.errorClass
     this._formElement = formElement;
   }
@@ -62,20 +63,29 @@ export default class FormValidator {
     });
     
   }
+  // Переключение кнопок джля сброса формы
+  _checkSubmitButton() {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    const submitButton = this._formElement.querySelector(this._submitButtonSelector);
+    this._toggleButtonState(inputList, submitButton);
+  }
 
   //Функция для сброса формы
     // Это ужасный метод, но за 4 часа это единственное рабочее что получилось:( у меня много ошибок, буду рефакторить на след итерации
     //@TODO Сделать из этого нормальный метод
   resetForm = () => {
-  const inputList = Array.from(this._formElement.querySelectorAll('*'));
-  inputList.forEach((inputItem) => { //@TODO сделать сброс классов более точечно, не для всех элементов массива
-    inputItem.textContent = "";
-    inputItem.classList.remove(this._errorClass);
-    inputItem.classList.remove(this._inputErrorClass);
+  const promtList = Array.from(this._formElement.querySelectorAll(this._promptErrorSelector));
+  const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+  promtList.forEach((item) => {
+    item.textContent = "";
+    item.classList.remove(this._errorClass);
+  });
+  inputList.forEach((item) => {
+    item.classList.remove(this._inputErrorClass);
   })
+
   this._formElement.reset();
-  this._formElement.querySelector(this._submitButtonSelector).classList.add(this._inactiveButtonClass);
-  this._formElement.querySelector(this._submitButtonSelector).setAttribute('disabled', '');
+  this._checkSubmitButton();
 }
   // Валидация
   enableValidation = () => {

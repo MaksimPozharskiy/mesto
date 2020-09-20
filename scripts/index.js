@@ -37,15 +37,9 @@ const gridPhotosContainer = document.querySelector('.grid-photos');
 // ==Кнопки закрытия попапов==
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
 const keyCodeEsc = 27;
-let popupCloseButton;
 // // _________________________________________________
 // // =================== Функции =====================
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-// ==Функция определения открытого попапа==
-const findOpenPopup = () => {
-  return document.querySelector('.popup_opened');
-}
-
 // ==Функция открытия попапа==
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -82,7 +76,7 @@ const formEditSubmitHandler = (event) => {
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
 
-  closePopup(findOpenPopup());
+  closePopup(popupEdit);
 }
 
 // ==Функция создания попапа с увеличеной картинкой==
@@ -98,8 +92,7 @@ const formAddSubmitHandler = (event) => {
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
   new Card(titleCard, linkCard, gridCardTemplateId).renderCard(container);
-  closePopup(findOpenPopup());
-  
+  closePopup(popupAdd);
 }
 
 // ____________________________________________________

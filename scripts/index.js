@@ -129,6 +129,10 @@ popupEditCloseButton.addEventListener('click', function() {
 popupAddCloseButton.addEventListener('click', function() {
   closePopup(popupAdd);
 })
+popupImageCloseButton.addEventListener('click', function() {
+  closePopup(popupImageWrap);
+})
+
 
 
 // ==Обработчик формы редактирования профиля==

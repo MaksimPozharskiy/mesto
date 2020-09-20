@@ -45,8 +45,6 @@ const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEscKey);
   popup.addEventListener('click', closePopupOverlay);
-  editFormValidator.resetForm();
-  addFormValidator.resetForm();
 }
 
 // ==Функция закрытия попапа по нажатию Esc==
@@ -101,14 +99,16 @@ const formAddSubmitHandler = (event) => {
 // ==Открытие попапа редактирование профиля==
 popupEditOpenButton.addEventListener('click', function() {
   openPopup(popupEdit);
+  editFormValidator.resetForm();
   //При открытии заполняем форму редактирования профиля текущими значениями
   nameInput.value = profileName.textContent;
   professionInput.value =  profileProfession.textContent;
 });
 
-// ==Открытие попапов==
+// ==Открытие попапа добавления картинки==
 popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
+  addFormValidator.resetForm();
 })
 
 // ==Закрытие попапов==

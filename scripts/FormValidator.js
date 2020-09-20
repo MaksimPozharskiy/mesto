@@ -83,7 +83,6 @@ export default class FormValidator {
   inputList.forEach((item) => {
     item.classList.remove(this._inputErrorClass);
   })
-
   this._formElement.reset();
   this._checkSubmitButton();
 }

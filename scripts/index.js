@@ -10,6 +10,7 @@ const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit')
+const popupEditCloseButton = popupEdit.querySelector('.popup__button-close');
 const popupEditForm = popupEdit.querySelector('.popup__form');
 const nameInput = popupEdit.querySelector('.popup__input_name_name');
 const professionInput = popupEdit.querySelector('.popup__input_name_profession');
@@ -17,6 +18,7 @@ const professionInput = popupEdit.querySelector('.popup__input_name_profession')
 // // ==Попап увеличения картинки==
 const gridPhotos = document.querySelectorAll('.grid-item__image');
 const popupImageWrap = document.querySelector('.popup_type_image');
+const popupImageCloseButton = popupImageWrap.querySelector('.popup__button-close')
 const popupImage = popupImageWrap.querySelector('.popup__image');
 const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
 

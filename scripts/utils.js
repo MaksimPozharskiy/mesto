@@ -12,7 +12,6 @@ const nameInput = popupEdit.querySelector('.popup__input_name_name');
 const professionInput = popupEdit.querySelector('.popup__input_name_profession');
 
 // // ==Попап увеличения картинки==
-const gridPhotos = document.querySelectorAll('.grid-item__image');
 const popupImageWrap = document.querySelector('.popup_type_image');
 const popupImageCloseButton = popupImageWrap.querySelector('.popup__button-close')
 const popupImage = popupImageWrap.querySelector('.popup__image');
@@ -96,7 +95,6 @@ export {
   popupEditForm,
   nameInput,
   professionInput,
-  gridPhotos,
   popupImageWrap,
   popupImageCloseButton,
   popupImage,

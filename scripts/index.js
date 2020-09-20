@@ -50,10 +50,6 @@ const findOpenPopup = () => {
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEscKey);
-  // Определяем кнопку закрытия открытого попапа и вешаем слушатель
-  popupCloseButton = popup.querySelector('.popup__button-close');
-  // popupCloseButton.addEventListener('click', closePopupCross);
-
   popup.addEventListener('click', closePopupOverlay);
   editFormValidator.resetForm();
   addFormValidator.resetForm();
@@ -62,8 +58,8 @@ const openPopup = (popup) => {
 // ==Функция закрытия попапа по нажатию Esc==
 const closePopupEscKey = (event) => {
   if (event.keyCode === keyCodeEsc) {
+    closePopup(document.querySelector('.popup_opened'));
     document.removeEventListener('keydown', closePopupEscKey);
-    closePopup(findOpenPopup());
   }
 }
 
@@ -76,7 +72,7 @@ const closePopup = (popup) => {
 // ==Закрытие попапа по клике на оверлей==
 const closePopupOverlay = event => { 
   if (event.target !== event.currentTarget) return;   
-  closePopup(findOpenPopup());
+  closePopup(event.target);
 }
 
 // // ==Обработчик формы редактирования профиля==
@@ -133,15 +129,11 @@ popupImageCloseButton.addEventListener('click', function() {
   closePopup(popupImageWrap);
 })
 
-
-
 // ==Обработчик формы редактирования профиля==
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
 
 // ==Обработчик формы добавления карточки==
 popupAddForm.addEventListener('submit', formAddSubmitHandler);
-
-
 
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============

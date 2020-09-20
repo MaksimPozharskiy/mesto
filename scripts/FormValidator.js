@@ -71,8 +71,6 @@ export default class FormValidator {
   }
 
   //Функция для сброса формы
-    // Это ужасный метод, но за 4 часа это единственное рабочее что получилось:( у меня много ошибок, буду рефакторить на след итерации
-    //@TODO Сделать из этого нормальный метод
   resetForm = () => {
   const promtList = Array.from(this._formElement.querySelectorAll(this._promptErrorSelector));
   const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));

@@ -89,7 +89,7 @@ const formAddSubmitHandler = (event) => {
 
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
-  new Card(titleCard, linkCard, gridCardTemplateId).renderCard(container);
+  container.prepend(new Card(titleCard, linkCard, gridCardTemplateId).generateCard());
   closePopup(popupAdd);
 }
 
@@ -134,7 +134,7 @@ popupAddForm.addEventListener('submit', formAddSubmitHandler);
 // Генерация изначальных карточек
 const container = document.querySelector('.grid-photos');
 initialCards.forEach(item => {
-  new Card(item.name, item.link, gridCardTemplateId, openPopup, popupImageWrap, fillPopupImage).renderCard(container);
+  container.prepend(new Card(item.name, item.link, gridCardTemplateId, openPopup, popupImageWrap, fillPopupImage).generateCard());
 })
 
 // Включаем валидацию формы редактрования профиля

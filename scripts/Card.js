@@ -27,7 +27,7 @@ export default class Card {
     this._likeButton.addEventListener('click', this._likeCardHandler);
   }
 
-  _generateCard(container) {
+  generateCard() {
     //Формируем шаблон карточки
     this._template = document.querySelector(this._templateSelector).content;
     this._view = this._template.cloneNode(true);
@@ -43,9 +43,6 @@ export default class Card {
     // Возвращаем готовую карточку
     return this._view;
   }
-  
-  renderCard = (container) => {
-    container.prepend(this._generateCard(container));
-  }
+
 }
 

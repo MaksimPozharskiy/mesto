@@ -1,11 +1,9 @@
+import {openPopup, popupImageWrap,fillPopupImage} from './utils.js';
 export default class Card {
-  constructor(titleCard, linkCard, templateSelector, openPopup, popupImageWrap, fillPopupImage ) {
+  constructor(titleCard, linkCard, templateSelector) {
     this._titleCard = titleCard;
     this._linkCard = linkCard;
     this._templateSelector = templateSelector;
-    this._openPopup = openPopup;
-    this._popupImageWrap = popupImageWrap;
-    this._fillPopupImage = fillPopupImage;
   }
 
   _likeCardHandler = () => {
@@ -13,8 +11,8 @@ export default class Card {
   }
 
   _openPopupHundler = () => {
-    this._openPopup(this._popupImageWrap);
-    this._fillPopupImage(this._image);
+    openPopup(popupImageWrap);
+    fillPopupImage(this._image);
   }
 
   _deleteCardHundler = () => {

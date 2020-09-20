@@ -45,17 +45,14 @@ let popupCloseButton;
 const findOpenPopup = () => {
   return document.querySelector('.popup_opened');
 }
-// ==Функция закрытия попапа по кнопке крестика==
-const closePopupCross = () => {
-  closePopup(findOpenPopup())
-}
+
 // ==Функция открытия попапа==
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEscKey);
   // Определяем кнопку закрытия открытого попапа и вешаем слушатель
   popupCloseButton = popup.querySelector('.popup__button-close');
-  popupCloseButton.addEventListener('click', closePopupCross);
+  // popupCloseButton.addEventListener('click', closePopupCross);
 
   popup.addEventListener('click', closePopupOverlay);
   editFormValidator.resetForm();
@@ -73,7 +70,6 @@ const closePopupEscKey = (event) => {
 // ==Функция закрытия попапа==
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
-  popupCloseButton.removeEventListener('click', closePopupCross);// удаляем слушатель с кнопки закрытия открытого ранее попапа
   popup.removeEventListener('click', closePopupOverlay);
 }
 
@@ -113,7 +109,7 @@ const formAddSubmitHandler = (event) => {
 // ____________________________________________________
 // ============== Обработчики событий =================
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-// ==Редактирование профиля==
+// ==Открытие попапа редактирование профиля==
 popupEditOpenButton.addEventListener('click', function() {
   openPopup(popupEdit);
   //При открытии заполняем форму редактирования профиля текущими значениями
@@ -126,11 +122,22 @@ popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
 })
 
+// ==Закрытие попапов==
+popupEditCloseButton.addEventListener('click', function() {
+  closePopup(popupEdit);
+})
+popupAddCloseButton.addEventListener('click', function() {
+  closePopup(popupAdd);
+})
+
+
 // ==Обработчик формы редактирования профиля==
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
 
 // ==Обработчик формы добавления карточки==
 popupAddForm.addEventListener('submit', formAddSubmitHandler);
+
+
 
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============

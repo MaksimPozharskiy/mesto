@@ -10,18 +10,18 @@ export default class Card {
     this._likeButton.classList.toggle('grid-item__like_liked');
   }
 
-  _openPopupHundler = () => {
+  _openPopupHandler = () => {
     openPopup(popupImageWrap);
     fillPopupImage(this._image);
   }
 
-  _deleteCardHundler = () => {
+  _deleteCardHandler = () => {
     this._deleteIcon.closest('.grid-item').remove();
   }
 
   _setEventListeners = () => {
-    this._deleteIcon.addEventListener('click', this._deleteCardHundler);
-    this._image.addEventListener('click', this._openPopupHundler);
+    this._deleteIcon.addEventListener('click', this._deleteCardHandler);
+    this._image.addEventListener('click', this._openPopupHandler);
     this._likeButton.addEventListener('click', this._likeCardHandler);
   }
 

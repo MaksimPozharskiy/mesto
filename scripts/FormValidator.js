@@ -72,17 +72,17 @@ export default class FormValidator {
 
   //Функция для сброса формы
   resetForm = () => {
-  const promtList = Array.from(this._formElement.querySelectorAll(this._promptErrorSelector));
-  const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-  promtList.forEach((item) => {
-    item.textContent = "";
-    item.classList.remove(this._errorClass);
-  });
-  inputList.forEach((item) => {
-    item.classList.remove(this._inputErrorClass);
-  })
-  this._formElement.reset();
-  this._checkSubmitButton();
+    const promtList = Array.from(this._formElement.querySelectorAll(this._promptErrorSelector));
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    promtList.forEach((item) => {
+      item.textContent = "";
+      item.classList.remove(this._errorClass);
+    });
+    inputList.forEach((item) => {
+      item.classList.remove(this._inputErrorClass);
+    })
+    this._formElement.reset();
+    this._checkSubmitButton();
 }
   // Валидация
   enableValidation = () => {

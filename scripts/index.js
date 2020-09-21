@@ -80,7 +80,7 @@ popupAddForm.addEventListener('submit', formAddSubmitHandler);
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // Генерация изначальных карточек
 initialCards.forEach(item => {
-  container.prepend(new Card(item.name, item.link, gridCardTemplateId, openPopup, popupImageWrap, fillPopupImage).generateCard());
+  container.prepend(new Card(item.name, item.link, gridCardTemplateId).generateCard());
 })
 
 // Включаем валидацию формы редактрования профиля

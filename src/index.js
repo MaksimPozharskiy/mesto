@@ -1,6 +1,7 @@
 import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
 import Section from './scripts/Section.js';
+import Popup from './scripts/Popup.js';
 import {initialCards} from './scripts/initial-cards.js';
 import {settingsForm} from './scripts/constants.js';
 import {openPopup,

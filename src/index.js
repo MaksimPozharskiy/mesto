@@ -1,5 +1,6 @@
 import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
+import Section from './scripts/Section.js';
 import {initialCards} from './scripts/initial-cards.js';
 import {settingsForm} from './scripts/constants.js';
 import {openPopup,
@@ -79,9 +80,16 @@ popupAddForm.addEventListener('submit', formAddSubmitHandler);
 // ======== Изначальное состояние страницы ============
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // Генерация изначальных карточек
-initialCards.forEach(item => {
-  container.prepend(new Card(item.name, item.link, gridCardTemplateId).generateCard());
-})
+const defaultCardGrid = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card (item.name, item.link, gridCardTemplateId);
+    const cardElement = card.generateCard();
+    defaultCardGrid.addItem(cardElement);
+  }
+}, container);
+
+defaultCardGrid.renderItems();
 
 // Включаем валидацию формы редактрования профиля
 const editFormValidator = new FormValidator(settingsForm, popupEditForm);

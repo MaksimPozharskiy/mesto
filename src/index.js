@@ -1,7 +1,7 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import {initialCards} from './initial-cards.js';
-import {settingsForm} from './constants.js';
+import Card from './scripts/Card.js';
+import FormValidator from './scripts/FormValidator.js';
+import {initialCards} from './scripts/initial-cards.js';
+import {settingsForm} from './scripts/constants.js';
 import {openPopup,
         closePopupEscKey,
         closePopup,
@@ -28,8 +28,8 @@ import {openPopup,
         linkCardInput,
         gridCardTemplateId,
         keyCodeEsc,
-        container} from './utils.js';
-
+        container} from './scripts/utils.js';
+import './pages/index.css';
 // ____________________________________________________
 // ============== Обработчики событий =================
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾

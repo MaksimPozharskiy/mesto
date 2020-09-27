@@ -6,23 +6,23 @@ export default class Card {
     this._templateSelector = templateSelector;
   }
 
-  _likeCardHandler = () => {
+  _likeCardHandler() {
     this._likeButton.classList.toggle('grid-item__like_liked');
   }
 
-  _openPopupHandler = () => {
+  _openPopupHandler() {
     openPopup(popupImageWrap);
     fillPopupImage(this._image);
   }
 
-  _deleteCardHandler = () => {
+  _deleteCardHandler() {
     this._deleteIcon.closest('.grid-item').remove();
   }
 
-  _setEventListeners = () => {
-    this._deleteIcon.addEventListener('click', this._deleteCardHandler);
-    this._image.addEventListener('click', this._openPopupHandler);
-    this._likeButton.addEventListener('click', this._likeCardHandler);
+  _setEventListeners() {
+    this._deleteIcon.addEventListener('click', this._deleteCardHandler.bind(this));
+    this._image.addEventListener('click', this._openPopupHandler.bind(this));
+    this._likeButton.addEventListener('click', this._likeCardHandler.bind(this));
   }
 
   generateCard() {

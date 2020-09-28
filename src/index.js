@@ -1,7 +1,7 @@
 import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
 import Section from './scripts/Section.js';
-import Popup from './scripts/Popup.js';
+import PopupWithImage from './scripts/PopupWithImage.js';
 import {initialCards} from './scripts/initial-cards.js';
 import {settingsForm} from './scripts/constants.js';
 import {openPopup,
@@ -19,9 +19,10 @@ import {openPopup,
         nameInput,
         professionInput,
         popupImageWrap,
-        popupImageCloseButton,
-        popupImage,
-        popupImageTitle,
+        popupImageSelector,
+        popupImageCloseButtonSelector,
+        imageSelector,
+        popupImageTitleSelector,
         popupAdd,
         popupAddOpenButton,
         popupAddCloseButton,
@@ -57,9 +58,9 @@ popupEditCloseButton.addEventListener('click', function() {
 popupAddCloseButton.addEventListener('click', function() {
   closePopup(popupAdd);
 })
-popupImageCloseButton.addEventListener('click', function() {
-  closePopup(popupImageWrap);
-})
+// popupImageCloseButton.addEventListener('click', function() {
+//   closePopup(popupImageWrap);
+// })
 
 // ==Обработчик формы редактирования профиля==
 popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
@@ -70,7 +71,10 @@ const formAddSubmitHandler = (event) => {
 
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
-  container.prepend(new Card(titleCard, linkCard, gridCardTemplateId).generateCard());
+  container.prepend(new Card(titleCard, linkCard, gridCardTemplateId, 
+    {handleCardClick: (name, link) => {
+      popupWithImage.open(name, link);
+    }}).generateCard());
   closePopup(popupAdd);
 }
 
@@ -84,7 +88,10 @@ popupAddForm.addEventListener('submit', formAddSubmitHandler);
 const defaultCardGrid = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card (item.name, item.link, gridCardTemplateId);
+    const card = new Card (item.name, item.link, gridCardTemplateId, 
+      {handleCardClick: (name, link) => {
+        popupWithImage.open(name, link);
+      }});
     const cardElement = card.generateCard();
     defaultCardGrid.addItem(cardElement);
   }
@@ -99,3 +106,6 @@ editFormValidator.enableValidation();
 // Включаем валидацию формы добавления карточки
 const addFormValidator = new FormValidator(settingsForm, popupAddForm);
 addFormValidator.enableValidation();
+
+const popupWithImage = new PopupWithImage(popupImageSelector, popupImageCloseButtonSelector, imageSelector, popupImageTitleSelector);
+popupWithImage.setEventListeners();

@@ -13,9 +13,10 @@ const professionInput = popupEdit.querySelector('.popup__input_name_profession')
 
 // // ==Попап увеличения картинки==
 const popupImageWrap = document.querySelector('.popup_type_image');
-const popupImageCloseButton = popupImageWrap.querySelector('.popup__button-close')
-const popupImage = popupImageWrap.querySelector('.popup__image');
-const popupImageTitle = popupImageWrap.querySelector('.popup__title-image');
+const popupImageSelector = '.popup_type_image';
+const popupImageCloseButtonSelector = '.popup__button-close';
+const imageSelector = '.popup__image';
+const popupImageTitleSelector = '.popup__title-image';
 
 // ==Попап добавления карточки==
 const popupAdd = document.querySelector('.popup_type_add')
@@ -39,29 +40,29 @@ const container = document.querySelector('.grid-photos');
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // ==Функция открытия попапа==
 const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEscKey);
-  popup.addEventListener('click', closePopupOverlay);
+  // popup.classList.add('popup_opened');
+  // document.addEventListener('keydown', closePopupEscKey);
+  // popup.addEventListener('click', closePopupOverlay);
 }
 
 // ==Функция закрытия попапа по нажатию Esc==
 const closePopupEscKey = (event) => {
-  if (event.keyCode === keyCodeEsc) {
-    closePopup(document.querySelector('.popup_opened'));
-    document.removeEventListener('keydown', closePopupEscKey);
-  }
+  // if (event.keyCode === keyCodeEsc) {
+  //   closePopup(document.querySelector('.popup_opened'));
+  //   document.removeEventListener('keydown', closePopupEscKey);
+  // }
 }
 
 // ==Функция закрытия попапа==
 const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  popup.removeEventListener('click', closePopupOverlay);
+  // popup.classList.remove('popup_opened');
+  // popup.removeEventListener('click', closePopupOverlay);
 }
 
 // ==Закрытие попапа по клике на оверлей==
 const closePopupOverlay = event => { 
-  if (event.target !== event.currentTarget) return;   
-  closePopup(event.target);
+  // if (event.target !== event.currentTarget) return;   
+  // closePopup(event.target);
 }
 
 // // ==Обработчик формы редактирования профиля==
@@ -76,8 +77,8 @@ const formEditSubmitHandler = (event) => {
 
 // ==Функция создания попапа с увеличеной картинкой==
 const fillPopupImage = (image) => {
-  popupImage.src = image.src;
-  popupImageTitle.textContent = image.alt;
+  // popupImage.src = image.src;
+  // popupImageTitle.textContent = image.alt;
 }
 
 export {
@@ -96,9 +97,10 @@ export {
   nameInput,
   professionInput,
   popupImageWrap,
-  popupImageCloseButton,
-  popupImage,
-  popupImageTitle,
+  popupImageSelector,
+  popupImageCloseButtonSelector,
+  imageSelector,
+  popupImageTitleSelector,
   popupAdd,
   popupAddOpenButton,
   popupAddCloseButton,

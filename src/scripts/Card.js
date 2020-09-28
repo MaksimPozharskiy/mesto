@@ -1,18 +1,14 @@
 import {openPopup, popupImageWrap,fillPopupImage} from './utils.js';
 export default class Card {
-  constructor(titleCard, linkCard, templateSelector) {
+  constructor(titleCard, linkCard, templateSelector, {handleCardClick}) {
     this._titleCard = titleCard;
     this._linkCard = linkCard;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _likeCardHandler() {
     this._likeButton.classList.toggle('grid-item__like_liked');
-  }
-
-  _openPopupHandler() {
-    openPopup(popupImageWrap);
-    fillPopupImage(this._image);
   }
 
   _deleteCardHandler() {
@@ -20,8 +16,10 @@ export default class Card {
   }
 
   _setEventListeners() {
+    this._image.addEventListener('click', () => {
+      this._handleCardClick(this._titleCard, this._linkCard);
+    })
     this._deleteIcon.addEventListener('click', this._deleteCardHandler.bind(this));
-    this._image.addEventListener('click', this._openPopupHandler.bind(this));
     this._likeButton.addEventListener('click', this._likeCardHandler.bind(this));
   }
 

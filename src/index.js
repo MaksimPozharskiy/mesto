@@ -2,19 +2,16 @@ import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
 import Section from './scripts/Section.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
 import {initialCards} from './scripts/initial-cards.js';
 import {settingsForm} from './scripts/constants.js';
-import {openPopup,
-        closePopupEscKey,
-        closePopup,
-        closePopupOverlay,
-        formEditSubmitHandler,
-        fillPopupImage,
+import {
         profileName,
         profileProfession,
         popupEditOpenButton,
         popupEdit,
-        popupEditCloseButton,
+        popupEditSelector,
+        popupEditCloseButtonSelector,
         popupEditForm,
         nameInput,
         professionInput,
@@ -23,12 +20,13 @@ import {openPopup,
         popupImageCloseButtonSelector,
         imageSelector,
         popupImageTitleSelector,
-        popupAdd,
+        popupAddSelector,
         popupAddOpenButton,
-        popupAddCloseButton,
+        popupAddCloseButtonSelector,
         popupAddForm,
         titleCardInput,
         linkCardInput,
+        popupAdd,
         gridCardTemplateId,
         keyCodeEsc,
         container} from './scripts/utils.js';
@@ -38,7 +36,7 @@ import './pages/index.css';
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // ==Открытие попапа редактирование профиля==
 popupEditOpenButton.addEventListener('click', function() {
-  openPopup(popupEdit);
+  popupEditProfile.open();
   editFormValidator.resetForm();
   //При открытии заполняем форму редактирования профиля текущими значениями
   nameInput.value = profileName.textContent;
@@ -47,25 +45,21 @@ popupEditOpenButton.addEventListener('click', function() {
 
 // ==Открытие попапа добавления картинки==
 popupAddOpenButton.addEventListener('click', function() {
-  openPopup(popupAdd);
+  popupAddCard.open();
   addFormValidator.resetForm();
 })
 
-// ==Закрытие попапов==
-popupEditCloseButton.addEventListener('click', function() {
-  closePopup(popupEdit);
-})
-popupAddCloseButton.addEventListener('click', function() {
-  closePopup(popupAdd);
-})
-// popupImageCloseButton.addEventListener('click', function() {
-//   closePopup(popupImageWrap);
-// })
 
 // ==Обработчик формы редактирования профиля==
-popupEditForm.addEventListener('submit', formEditSubmitHandler); // Кнопка "Сохранить"
+const formEditSubmitHandler = (event) => {
+  event.preventDefault();
 
-// // ==Обработчик формы добавления карточки==
+  profileName.textContent = nameInput.value;
+  profileProfession.textContent = professionInput.value;
+
+  popupEditProfile.close();
+}
+// ==Обработчик формы добавления карточки==
 const formAddSubmitHandler = (event) => {
   event.preventDefault();
 
@@ -75,11 +69,8 @@ const formAddSubmitHandler = (event) => {
     {handleCardClick: (name, link) => {
       popupWithImage.open(name, link);
     }}).generateCard());
-  closePopup(popupAdd);
+    popupAddCard.close();
 }
-
-// ==Обработчик формы добавления карточки==
-popupAddForm.addEventListener('submit', formAddSubmitHandler);
 
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============
@@ -107,5 +98,14 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(settingsForm, popupAddForm);
 addFormValidator.enableValidation();
 
+//Попап увелечения изображения
 const popupWithImage = new PopupWithImage(popupImageSelector, popupImageCloseButtonSelector, imageSelector, popupImageTitleSelector);
 popupWithImage.setEventListeners();
+
+const popupAddCard = new PopupWithForm(popupAddSelector, popupAddCloseButtonSelector,
+  formAddSubmitHandler)
+popupAddCard.setEventListeners();
+
+const popupEditProfile = new PopupWithForm(popupEditSelector, popupEditCloseButtonSelector,
+  formEditSubmitHandler)
+popupEditProfile.setEventListeners();

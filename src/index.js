@@ -1,13 +1,13 @@
 import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
 import Section from './scripts/Section.js';
+import UserInfo from './scripts/UserInfo.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import {initialCards} from './scripts/initial-cards.js';
 import {settingsForm} from './scripts/constants.js';
 import {
-        profileName,
-        profileProfession,
+        profileSelectors,
         popupEditOpenButton,
         popupEdit,
         popupEditSelector,
@@ -34,13 +34,17 @@ import './pages/index.css';
 // ____________________________________________________
 // ============== Обработчики событий =================
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
 // ==Открытие попапа редактирование профиля==
+const userInfo = new UserInfo(profileSelectors);
 popupEditOpenButton.addEventListener('click', function() {
   popupEditProfile.open();
   editFormValidator.resetForm();
-  //При открытии заполняем форму редактирования профиля текущими значениями
-  nameInput.value = profileName.textContent;
-  professionInput.value =  profileProfession.textContent;
+
+  const currentInfo = userInfo.getUserInfo();
+
+  nameInput.value = currentInfo.name;
+  professionInput.value = currentInfo.profession;
 });
 
 // ==Открытие попапа добавления картинки==
@@ -49,14 +53,17 @@ popupAddOpenButton.addEventListener('click', function() {
   addFormValidator.resetForm();
 })
 
-
 // ==Обработчик формы редактирования профиля==
 const formEditSubmitHandler = (event) => {
   event.preventDefault();
 
-  profileName.textContent = nameInput.value;
-  profileProfession.textContent = professionInput.value;
-
+  const info = {
+    name: nameInput.value,
+    profession: professionInput.value
+  }
+  
+  userInfo.setUserInfo(info);
+  
   popupEditProfile.close();
 }
 // ==Обработчик формы добавления карточки==
@@ -109,3 +116,5 @@ popupAddCard.setEventListeners();
 const popupEditProfile = new PopupWithForm(popupEditSelector, popupEditCloseButtonSelector,
   formEditSubmitHandler)
 popupEditProfile.setEventListeners();
+
+

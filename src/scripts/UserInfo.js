@@ -1,21 +1,21 @@
-import { construct } from "core-js/fn/reflect"
 
 export default class UserInfo {
-  constructor({userName, userProfession}) {
-    this._userName = userName;
-    this._userProfession = userProfession;
+  constructor({profileNameSelector, profileProfessionSelector}) {
+    this._userName = document.querySelector(profileNameSelector);
+    this._userProfession = document.querySelector(profileProfessionSelector);
   }
 
   getUserInfo() {
     const userData = {
-      name: this._userName,
-      profession: this._userProfession
+      name: this._userName.textContent,
+      profession: this._userProfession.textContent
     }
+    
     return userData;
   }
 
   setUserInfo({name, profession}) {
-    this._userName = name;
-    this._userProfession = profession;
+    this._userName.textContent =  name;
+    this._userProfession.textContent = profession;
   }
 }

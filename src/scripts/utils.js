@@ -2,8 +2,10 @@
 // // =================== Переменные =====================
 // // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // // ==Попап редактирования профиля==
-const profileName = document.querySelector('.profile__name');
-const profileProfession = document.querySelector('.profile__profession');
+const profileSelectors = {
+  profileNameSelector: '.profile__name', 
+  profileProfessionSelector: '.profile__profession'
+}
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit')
 const popupEditSelector = '.popup_type_edit';
@@ -37,13 +39,8 @@ const keyCodeEsc = 27;
 // Контейнер карточек
 const container = document.querySelector('.grid-photos');
 
-// // _________________________________________________
-// // =================== Функции =====================
-// // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-
 export {
-  profileName,
-  profileProfession,
+  profileSelectors,
   popupEditOpenButton,
   popupEdit,
   popupEditSelector,

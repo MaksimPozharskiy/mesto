@@ -1,4 +1,3 @@
-import {openPopup, popupImageWrap,fillPopupImage} from './utils.js';
 export default class Card {
   constructor(titleCard, linkCard, templateSelector, {handleCardClick}) {
     this._titleCard = titleCard;

@@ -4,7 +4,8 @@
 // // ==Попап редактирования профиля==
 const profileSelectors = {
   profileNameSelector: '.profile__name', 
-  profileProfessionSelector: '.profile__profession'
+  profileProfessionSelector: '.profile__profession',
+  profileAvatarSelector: '.popup_type_avatar'
 }
 const profileName = document.querySelector(profileSelectors.profileNameSelector);
 const profileProfession = document.querySelector(profileSelectors.profileProfessionSelector);
@@ -16,7 +17,15 @@ const popupEditForm = popupEdit.querySelector('.popup__form');
 const nameInput = popupEdit.querySelector('.popup__input_name_name');
 const professionInput = popupEdit.querySelector('.popup__input_name_profession');
 
-// // ==Попап увеличения картинки==
+// ==Попап редактирования аватара==
+const avatarImage = document.querySelector('.profile__avatar')
+const popupAvatar = document.querySelector('.popup_type_avatar');
+const popupAvatarButton = document.querySelector('.profile__avatar-wrapp')
+const popupAvatarForm = popupAvatar.querySelector('.popup__form');
+const popupAvatarCloseButtonSelector = '.popup__button-close';
+const popupAvatarInput = popupAvatar.querySelector('.popup__input_name_link-avatar');
+
+// ==Попап увеличения картинки==
 const popupImageWrap = document.querySelector('.popup_type_image');
 const popupImageSelector = '.popup_type_image';
 const popupImageCloseButtonSelector = '.popup__button-close';
@@ -45,6 +54,12 @@ export {
   profileSelectors,
   profileName,
   profileProfession,
+  popupAvatar,
+  avatarImage,
+  popupAvatarForm,
+  popupAvatarCloseButtonSelector,
+  popupAvatarButton,
+  popupAvatarInput,
   popupEditOpenButton,
   popupEdit,
   popupEditSelector,

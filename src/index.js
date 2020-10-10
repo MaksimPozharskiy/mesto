@@ -11,6 +11,12 @@ import {
         profileSelectors,
         profileName,
         profileProfession,
+        popupAvatar,
+        avatarImage,
+        popupAvatarForm,
+        popupAvatarCloseButtonSelector,
+        popupAvatarButton,
+        popupAvatarInput,
         popupEditOpenButton,
         popupEdit,
         popupEditSelector,
@@ -56,6 +62,12 @@ popupAddOpenButton.addEventListener('click', function() {
   addFormValidator.resetForm();
 })
 
+// ==Открытие попапа редактирования аватара==
+popupAvatarButton.addEventListener('click', function() {
+  popupEditAvatar.open();
+  avatarFormValidator.resetForm();
+})
+
 // ==Обработчик формы редактирования профиля==
 const formEditSubmitHandler = (event) => {
   event.preventDefault();
@@ -83,6 +95,18 @@ const formAddSubmitHandler = (event) => {
       popupWithImage.open(name, link);
     }}).generateCard());
     popupAddCard.close();
+}
+
+// ==Обработчик формы редактирования аватара==
+const formEditAvatarSubmitHandler = (event) => {
+  event.preventDefault();
+
+  avatarImage.src = popupAvatarInput.value;
+
+  api.editUserAvatar(popupAvatarInput.value)
+    .catch(error => console.log(error));
+
+  popupEditAvatar.close();
 }
 
 // ____________________________________________________
@@ -116,6 +140,7 @@ defaultCardGrid.renderItems();
 api.getUserInfo().then((data => {
   profileName.textContent = data.name;
   profileProfession.textContent = data.about;
+  avatarImage.src = data.avatar;
 }))
   .catch((error) => console.log(error));
 
@@ -128,13 +153,23 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(settingsForm, popupAddForm);
 addFormValidator.enableValidation();
 
+// Включаем валидацию формы редактирования аватара
+const avatarFormValidator = new FormValidator(settingsForm, popupAvatarForm);
+avatarFormValidator.enableValidation();
+
 //Попап увелечения изображения
 const popupWithImage = new PopupWithImage(popupImageSelector, popupImageCloseButtonSelector, imageSelector, popupImageTitleSelector);
 popupWithImage.setEventListeners();
 
+// Попап добавления карточки
 const popupAddCard = new PopupWithForm(popupAddSelector, popupAddCloseButtonSelector,
   formAddSubmitHandler)
 popupAddCard.setEventListeners();
+
+// Попап редактирования аватара
+const popupEditAvatar = new PopupWithForm(profileSelectors.profileAvatarSelector, popupAvatarCloseButtonSelector,
+  formEditAvatarSubmitHandler);
+popupEditAvatar.setEventListeners();
 
 const popupEditProfile = new PopupWithForm(popupEditSelector, popupEditCloseButtonSelector,
   formEditSubmitHandler)

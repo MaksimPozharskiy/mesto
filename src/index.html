@@ -85,6 +85,19 @@
   </div>
 </div>
 
+<!-- Popup edit avatar profile -->
+<div class="popup popup_type_avatar">
+  <div class="popup__container">
+    <h4 class="popup__title">Обновить аватар</h4>
+    <form class="popup__form" name="editAvatar" novalidate>
+      <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-avatar" name="avatar-input" id="avatar-input" required>
+      <span class='popup__input-error' id='avatar-input-error'>Заполните это поле.</span>
+      <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
+    </form>
+    <button type="button" class="popup__button-close"></button>
+  </div>
+</div>
+
 <!-- Templates -->
   <template id="grid-item">
     <li class="grid-item">

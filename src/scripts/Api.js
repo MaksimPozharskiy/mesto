@@ -5,16 +5,18 @@ export default class Api {
     this._headers = this._options.headers;
   }
 
+  // Получить данные пользователя
   getUserInfo() {
     return fetch(this._baseUrl, {headers: this._headers})
       .then(res => {
         if (res.ok) {
-          return res.json()
+          return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
+  // Отредактировать данные пользователя
   editUserInfo(name, profession) {
     return fetch(this._baseUrl, {
       method: 'PATCH',
@@ -23,10 +25,28 @@ export default class Api {
         name: name,
         about: profession
       })
-    }).then(res => {
+    })
+    .then(res => {
       if (!res.ok) {
         return Promise.reject(`Ошибка: ${res.status}`);
       }
+    })
+  }
+
+  // Отредактировать аватар пользователя
+  editUserAvatar(urlAvatar) {
+    console.log(urlAvatar);
+    return fetch(`${this._baseUrl}/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: urlAvatar
+      })
+    })
+    .then(res => {
+        if (!res.ok) {
+          return Promise.reject(`Ошибка: ${res.status}`);
+        }
     })
   }
 

@@ -4,10 +4,13 @@ import Section from './scripts/Section.js';
 import UserInfo from './scripts/UserInfo.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
+import Api from './scripts/Api.js';
 import {initialCards} from './scripts/initial-cards.js';
 import {settingsForm} from './scripts/constants.js';
 import {
         profileSelectors,
+        profileName,
+        profileProfession,
         popupEditOpenButton,
         popupEdit,
         popupEditSelector,
@@ -61,6 +64,9 @@ const formEditSubmitHandler = (event) => {
     name: nameInput.value,
     profession: professionInput.value
   }
+
+  api.editUserInfo(info.name, info.profession)
+    .catch((error) => console.log(error));
   
   userInfo.setUserInfo(info);
   
@@ -82,6 +88,15 @@ const formAddSubmitHandler = (event) => {
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// Класс для работы с API
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16/users/me',
+  headers: {
+    authorization: 'e8e5e3a7-8ba0-46eb-8d27-e0f2fc68826d',
+    'Content-Type': 'application/json'
+  }
+}); 
+
 // Генерация изначальных карточек
 const defaultCardGrid = new Section({
   items: initialCards,
@@ -96,6 +111,14 @@ const defaultCardGrid = new Section({
 }, container);
 
 defaultCardGrid.renderItems();
+
+// Получаем с сервера данные пользователя
+api.getUserInfo().then((data => {
+  profileName.textContent = data.name;
+  profileProfession.textContent = data.about;
+}))
+  .catch((error) => console.log(error));
+
 
 // Включаем валидацию формы редактрования профиля
 const editFormValidator = new FormValidator(settingsForm, popupEditForm);

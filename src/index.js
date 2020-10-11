@@ -129,8 +129,14 @@ const api = new Api({
 // Получаем карточки с сервера
 // Генерация изначальных карточек
 api.getInitialCards().then((data) => {
+  generateInitialCards(data);
+  }
+);
+
+// Функция генерации изначальных карточек
+const generateInitialCards = (cards) => {
   const defaultCardGrid = new Section({
-    items: data,
+    items: cards,
     renderer: (item) => {
       const card = new Card (item.name, item.link, gridCardTemplateId, 
         {handleCardClick: (name, link) => {
@@ -141,8 +147,7 @@ api.getInitialCards().then((data) => {
     }
   }, container);
   defaultCardGrid.renderItems();
-  }
-);
+}
 
 // Получаем с сервера данные пользователя
 api.getUserInfo().then((data => {

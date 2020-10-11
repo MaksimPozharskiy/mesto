@@ -5,7 +5,6 @@ import UserInfo from './scripts/UserInfo.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import Api from './scripts/Api.js';
-import {initialCards} from './scripts/initial-cards.js';
 import {settingsForm} from './scripts/constants.js';
 import {
         profileSelectors,
@@ -120,27 +119,30 @@ const formEditAvatarSubmitHandler = (event) => {
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // Класс для работы с API
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16/users/me',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
   headers: {
     authorization: 'e8e5e3a7-8ba0-46eb-8d27-e0f2fc68826d',
     'Content-Type': 'application/json'
   }
 }); 
 
+// Получаем карточки с сервера
 // Генерация изначальных карточек
-const defaultCardGrid = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card (item.name, item.link, gridCardTemplateId, 
-      {handleCardClick: (name, link) => {
-        popupWithImage.open(name, link);
-      }});
-    const cardElement = card.generateCard();
-    defaultCardGrid.addItem(cardElement);
+api.getInitialCards().then((data) => {
+  const defaultCardGrid = new Section({
+    items: data,
+    renderer: (item) => {
+      const card = new Card (item.name, item.link, gridCardTemplateId, 
+        {handleCardClick: (name, link) => {
+          popupWithImage.open(name, link);
+        }});
+      const cardElement = card.generateCard();
+      defaultCardGrid.addItem(cardElement);
+    }
+  }, container);
+  defaultCardGrid.renderItems();
   }
-}, container);
-
-defaultCardGrid.renderItems();
+);
 
 // Получаем с сервера данные пользователя
 api.getUserInfo().then((data => {

@@ -5,9 +5,20 @@ export default class Api {
     this._headers = this._options.headers;
   }
 
+  // Получить начальные карточки
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {headers: this._headers})
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
   // Получить данные пользователя
   getUserInfo() {
-    return fetch(this._baseUrl, {headers: this._headers})
+    return fetch(`${this._baseUrl}/users/me`, {headers: this._headers})
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -18,7 +29,7 @@ export default class Api {
 
   // Отредактировать данные пользователя
   editUserInfo(name, profession) {
-    return fetch(this._baseUrl, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -36,7 +47,7 @@ export default class Api {
   // Отредактировать аватар пользователя
   editUserAvatar(urlAvatar) {
     console.log(urlAvatar);
-    return fetch(`${this._baseUrl}/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({

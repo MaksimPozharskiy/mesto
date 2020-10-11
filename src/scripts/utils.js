@@ -24,6 +24,7 @@ const popupAvatarButton = document.querySelector('.profile__avatar-wrapp')
 const popupAvatarForm = popupAvatar.querySelector('.popup__form');
 const popupAvatarCloseButtonSelector = '.popup__button-close';
 const popupAvatarInput = popupAvatar.querySelector('.popup__input_name_link-avatar');
+const popupAvatarSubmitButton = popupAvatar.querySelector('.popup__button-save');
 
 // ==Попап увеличения картинки==
 const popupImageWrap = document.querySelector('.popup_type_image');
@@ -60,6 +61,7 @@ export {
   popupAvatarCloseButtonSelector,
   popupAvatarButton,
   popupAvatarInput,
+  popupAvatarSubmitButton,
   popupEditOpenButton,
   popupEdit,
   popupEditSelector,

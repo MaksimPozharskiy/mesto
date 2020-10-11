@@ -17,6 +17,7 @@ import {
         popupAvatarCloseButtonSelector,
         popupAvatarButton,
         popupAvatarInput,
+        popupAvatarSubmitButton,
         popupEditOpenButton,
         popupEdit,
         popupEditSelector,
@@ -49,6 +50,7 @@ const userInfo = new UserInfo(profileSelectors);
 popupEditOpenButton.addEventListener('click', function() {
   popupEditProfile.open();
   editFormValidator.resetForm();
+  popupEditProfile.resetWaitSubmitButton();
 
   const currentInfo = userInfo.getUserInfo();
 
@@ -60,12 +62,14 @@ popupEditOpenButton.addEventListener('click', function() {
 popupAddOpenButton.addEventListener('click', function() {
   popupAddCard.open();
   addFormValidator.resetForm();
+  popupAddCard.resetWaitSubmitButton();
 })
 
 // ==Открытие попапа редактирования аватара==
 popupAvatarButton.addEventListener('click', function() {
   popupEditAvatar.open();
   avatarFormValidator.resetForm();
+  popupEditAvatar.resetWaitSubmitButton();
 })
 
 // ==Обработчик формы редактирования профиля==
@@ -76,13 +80,13 @@ const formEditSubmitHandler = (event) => {
     name: nameInput.value,
     profession: professionInput.value
   }
-
+  popupEditProfile.waitSubmitButton('Сохранение...')
   api.editUserInfo(info.name, info.profession)
-    .catch((error) => console.log(error));
-  
-  userInfo.setUserInfo(info);
-  
-  popupEditProfile.close();
+    .catch((error) => console.log(error))
+    .finally(() => {
+      userInfo.setUserInfo(info);
+      popupEditProfile.close();
+    })
 }
 // ==Обработчик формы добавления карточки==
 const formAddSubmitHandler = (event) => {
@@ -102,11 +106,13 @@ const formEditAvatarSubmitHandler = (event) => {
   event.preventDefault();
 
   avatarImage.src = popupAvatarInput.value;
+  popupEditAvatar.waitSubmitButton('Сохранение...');
 
   api.editUserAvatar(popupAvatarInput.value)
-    .catch(error => console.log(error));
-
-  popupEditAvatar.close();
+    .catch(error => console.log(error))
+    .finally(() => {
+      popupEditAvatar.close();
+    });
 }
 
 // ____________________________________________________
@@ -171,6 +177,7 @@ const popupEditAvatar = new PopupWithForm(profileSelectors.profileAvatarSelector
   formEditAvatarSubmitHandler);
 popupEditAvatar.setEventListeners();
 
+// Попап редактирования профиля
 const popupEditProfile = new PopupWithForm(popupEditSelector, popupEditCloseButtonSelector,
   formEditSubmitHandler)
 popupEditProfile.setEventListeners();

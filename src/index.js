@@ -97,7 +97,12 @@ const formAddSubmitHandler = (event) => {
     {handleCardClick: (name, link) => {
       popupWithImage.open(name, link);
     }}).generateCard());
+
+  api.addCard(titleCard, linkCard)
+  .catch((error) => console.log(error))
+  .finally(() => {
     popupAddCard.close();
+  })
 }
 
 // ==Обработчик формы редактирования аватара==
@@ -128,8 +133,8 @@ const api = new Api({
 
 // Получаем карточки с сервера
 // Генерация изначальных карточек
-api.getInitialCards().then((data) => {
-  generateInitialCards(data);
+api.getInitialCards().then((cards) => {
+  generateInitialCards(cards);
   }
 );
 

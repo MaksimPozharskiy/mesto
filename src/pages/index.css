@@ -33,6 +33,8 @@
 @import url('../blocks/grid-item/__name/grid-item__name.css');
 @import url('../blocks/grid-item/__wrap/grid-item__wrap.css');
 @import url('../blocks/grid-item/__delete-icon/grid-item__delete-icon.css');
+@import url('../blocks/grid-item/__like-container/grid-item__like-container.css');
+@import url('../blocks/grid-item/__like-counter/grid-item__like-counter.css');
 
 /* Footer */ 
 

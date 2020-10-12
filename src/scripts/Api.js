@@ -16,6 +16,18 @@ export default class Api {
     });
   }
 
+  // Добавление новой карточки на сервер
+  addCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
+    })
+  }
+
   // Получить данные пользователя
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {headers: this._headers})

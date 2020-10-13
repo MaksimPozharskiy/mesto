@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(titleCard, linkCard, templateSelector, {handleCardClick}) {
+  constructor(titleCard, linkCard, templateSelector, {handleCardClick}, cardId) {
     this._titleCard = titleCard;
     this._linkCard = linkCard;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._cardId = cardId;
   }
 
   _likeCardHandler() {
@@ -37,6 +38,11 @@ export default class Card {
 
     // Возвращаем готовую карточку
     return this._view;
+  }
+
+  
+  getIdCard() {
+    return this._cardId;
   }
 
 }

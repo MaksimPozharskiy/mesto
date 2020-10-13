@@ -119,6 +119,12 @@ const formEditAvatarSubmitHandler = (event) => {
     });
 }
 
+// ==Обработчик лайкания карточки==
+const likeCardHundler = () => {
+
+}
+
+
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -146,7 +152,7 @@ const generateInitialCards = (cards) => {
       const card = new Card (item.name, item.link, gridCardTemplateId, 
         {handleCardClick: (name, link) => {
           popupWithImage.open(name, link);
-        }});
+        }}, item._id);
       const cardElement = card.generateCard();
       defaultCardGrid.addItem(cardElement);
     }

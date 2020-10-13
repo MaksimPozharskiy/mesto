@@ -27,7 +27,19 @@ export default class Api {
       })
     })
   }
+  // Постановка лайка карточке
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+  }
 
+  // Удаление лайка карточке
+  unlikeCard(cardId) {
+
+  }
+  
   // Получить данные пользователя
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {headers: this._headers})

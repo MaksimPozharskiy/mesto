@@ -7,6 +7,7 @@ const profileSelectors = {
   profileProfessionSelector: '.profile__profession',
   profileAvatarSelector: '.popup_type_avatar'
 }
+const userId = 'fdbdaccad2c90e74c623abba';
 const profileName = document.querySelector(profileSelectors.profileNameSelector);
 const profileProfession = document.querySelector(profileSelectors.profileProfessionSelector);
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
@@ -53,6 +54,7 @@ const container = document.querySelector('.grid-photos');
 
 export {
   profileSelectors,
+  userId,
   profileName,
   profileProfession,
   popupAvatar,

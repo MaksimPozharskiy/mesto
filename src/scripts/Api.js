@@ -37,7 +37,10 @@ export default class Api {
 
   // Удаление лайка карточке
   unlikeCard(cardId) {
-
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
   }
   
   // Получить данные пользователя

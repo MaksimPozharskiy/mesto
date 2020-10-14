@@ -8,6 +8,7 @@ import Api from './scripts/Api.js';
 import {settingsForm} from './scripts/constants.js';
 import {
         profileSelectors,
+        userId,
         profileName,
         profileProfession,
         popupAvatar,
@@ -119,12 +120,6 @@ const formEditAvatarSubmitHandler = (event) => {
     });
 }
 
-// ==Обработчик лайкания карточки==
-const likeCardHundler = () => {
-
-}
-
-
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -149,15 +144,29 @@ const generateInitialCards = (cards) => {
   const defaultCardGrid = new Section({
     items: cards,
     renderer: (item) => {
-      const card = new Card (item.name, item.link, gridCardTemplateId, 
-        {handleCardClick: (name, link) => {
+      const card = new Card (item.name, item.link, item.likes, userId, gridCardTemplateId, 
+        {
+          handleCardClick: (name, link) => {
           popupWithImage.open(name, link);
-        }}, item._id);
+        },
+        likeCardHandler: () => {
+          const likedCard = card.likedCard();
+          const resultApi = likedCard ? api.unlikeCard(card.getIdCard()) : api.likeCard(card.getIdCard());
+
+          resultApi.then(response => response.json())
+            .then(data => {
+              card.setLikes(data.likes) // Обновляем список лайкнувших карточку
+              card.renderLikes(); // Отрисовываем на клиенте
+            });
+        }
+      }, item._id);
       const cardElement = card.generateCard();
       defaultCardGrid.addItem(cardElement);
+
     }
   }, container);
   defaultCardGrid.renderItems();
+
 }
 
 // Получаем с сервера данные пользователя

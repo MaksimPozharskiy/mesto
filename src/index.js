@@ -94,16 +94,32 @@ const formAddSubmitHandler = (event) => {
 
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
-  container.prepend(new Card(titleCard, linkCard, gridCardTemplateId, 
-    {handleCardClick: (name, link) => {
-      popupWithImage.open(name, link);
-    }}).generateCard());
-
-  api.addCard(titleCard, linkCard)
-  .catch((error) => console.log(error))
-  .finally(() => {
-    popupAddCard.close();
+  api.addCard(titleCard, linkCard).then(response => {
+    return response.json();
   })
+  .then(data=> {
+    const card = new Card (titleCard, linkCard, [], userId, gridCardTemplateId,  
+      {
+        handleCardClick: (name, link) => {
+        popupWithImage.open(name, link);
+      },
+      likeCardHandler: () => {
+        const likedCard = card.likedCard();
+        const resultApi = likedCard ? api.unlikeCard(card.getIdCard()) : api.likeCard(card.getIdCard());
+  
+        resultApi.then(response => response.json())
+          .then(data => {
+            card.setLikes(data.likes) // Обновляем список лайкнувших карточку
+            card.renderLikes(); // Отрисовываем на клиенте
+          });
+      }
+    }, data._id);
+    const cardElement = card.generateCard();
+    container.prepend(cardElement);
+  })
+  .catch((error) => console.log(error))
+  
+  popupAddCard.close();
 }
 
 // ==Обработчик формы редактирования аватара==

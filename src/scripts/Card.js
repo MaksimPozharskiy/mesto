@@ -22,7 +22,7 @@ export default class Card {
     })
     this._deleteIcon.addEventListener('click', this._deleteCardHandler.bind(this));
     this._likeButton.addEventListener('click', () => {
-      this._likeCardHandler(this._likeButton, this._likes);
+      this._likeCardHandler();
     })
   }
 

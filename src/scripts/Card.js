@@ -38,7 +38,6 @@ export default class Card {
     this._image.src = this._linkCard;
     this._image.alt = this._titleCard;
     this._view.querySelector('.grid-item__name').textContent = this._titleCard;
-    this.showLikes()
     this.renderLikes();
     
     this._setEventListeners();

@@ -1,11 +1,12 @@
 export default class Card {
-  constructor({name, link, likes}, userId, templateSelector, {handleCardClick, likeCardHandler}, cardId) {
+  constructor({name, link, likes, owner}, userId, templateSelector, {handleCardClick, likeCardHandler}, cardId) {
     this._titleCard = name;
     this._linkCard = link;
     this._templateSelector = templateSelector;
     this._cardId = cardId;
     this._countLikes = likes;
     this._userId = userId;
+    this._ownerId = owner._id;
 
     // Обработчики
     this._handleCardClick = handleCardClick;
@@ -33,6 +34,9 @@ export default class Card {
     this._likeButton = this._view.querySelector('.grid-item__like');
     this._image = this._view.querySelector('.grid-item__image');
     this._deleteIcon = this._view.querySelector('.grid-item__delete-icon');
+    if (this._ownerId !== this._userId) {
+      this._deleteIcon.remove();
+    }
     // if ()
     this._likes =  this._view.querySelector('.grid-item__like-counter');
     // Заполняем содержимое карточки

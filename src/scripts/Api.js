@@ -27,6 +27,12 @@ export default class Api {
       })
     })
   }
+
+  // Удалить карточку
+  deleteCard() {
+    
+  }
+
   // Постановка лайка карточке
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {

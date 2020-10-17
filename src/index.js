@@ -97,8 +97,8 @@ const formAddSubmitHandler = (event) => {
   api.addCard(titleCard, linkCard).then(response => {
     return response.json();
   })
-  .then(data=> {
-    const card = new Card (titleCard, linkCard, [], userId, gridCardTemplateId,  
+  .then(dataCard=> {
+    const card = new Card (dataCard, userId, gridCardTemplateId,  
       {
         handleCardClick: (name, link) => {
         popupWithImage.open(name, link);
@@ -113,7 +113,7 @@ const formAddSubmitHandler = (event) => {
             card.renderLikes(); // Отрисовываем на клиенте
           });
       }
-    }, data._id);
+    }, dataCard._id);
     const cardElement = card.generateCard();
     container.prepend(cardElement);
   })
@@ -160,7 +160,7 @@ const generateInitialCards = (cards) => {
   const defaultCardGrid = new Section({
     items: cards,
     renderer: (item) => {
-      const card = new Card (item.name, item.link, item.likes, userId, gridCardTemplateId, 
+      const card = new Card (item, userId, gridCardTemplateId, 
         {
           handleCardClick: (name, link) => {
           popupWithImage.open(name, link);
@@ -178,7 +178,6 @@ const generateInitialCards = (cards) => {
       }, item._id);
       const cardElement = card.generateCard();
       defaultCardGrid.addItem(cardElement);
-
     }
   }, container);
   defaultCardGrid.renderItems();

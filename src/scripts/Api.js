@@ -7,7 +7,8 @@ export default class Api {
   // Получить начальные карточки
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {headers: this._headers})
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
 
   // Добавление новой карточки на сервер
@@ -20,7 +21,8 @@ export default class Api {
         link: link
       })
     })
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
 
   // Удалить карточку
@@ -29,7 +31,8 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
 
   // Постановка лайка карточке
@@ -38,7 +41,8 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
     })
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
 
   // Удаление лайка карточке
@@ -47,18 +51,20 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
   
   // Получить данные пользователя
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {headers: this._headers})
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
 
   // Отредактировать данные пользователя
   editUserInfo(name, profession) {
-    return fetch(`${this._baseUrl}/use1rs/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -66,7 +72,8 @@ export default class Api {
         about: profession
       })
     })
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
 
   // Отредактировать аватар пользователя
@@ -79,14 +86,19 @@ export default class Api {
         avatar: urlAvatar
       })
     })
-    .then(response => this._checkRequestResult(response));
+    .then(response => this._checkRequestResult(response))
+    .catch(error => this._errorHandler(error));
   }
 
   _checkRequestResult(response) {
     if (response.ok) {
       return response.json(); 
     }
-    return Promise.reject(`Ошибка: ${response.status}`); 
+    return Promise.reject(`Возникла ошибка: ${response.status}`); 
+  }
+
+  _errorHandler(error) {
+    console.log(error);
   }
 }
 

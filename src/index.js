@@ -81,7 +81,6 @@ const formEditSubmitHandler = (event) => {
   }
   popupEditProfile.waitSubmitButton('Сохранение...')
   api.editUserInfo(info.name, info.profession)
-    .catch((error) => console.log(error))
     .finally(() => {
       userInfo.setUserInfo(info);
       popupEditProfile.close();
@@ -107,7 +106,7 @@ const formAddSubmitHandler = (event) => {
           resultApi.then(data => {
               card.setLikes(data.likes) // Обновляем список лайкнувших карточку
               card.renderLikes(); // Отрисовываем на клиенте
-            }).catch((error) => console.log(error));
+            });
         },
         deleteCardHandler: () => {
           popupConfirm.open(card);
@@ -115,8 +114,7 @@ const formAddSubmitHandler = (event) => {
       }, dataCard._id);
     const cardElement = card.generateCard();
     container.prepend(cardElement);
-  })
-  .catch((error) => console.log(error))
+  });
   
   popupAddCard.close();
 }
@@ -129,7 +127,6 @@ const formEditAvatarSubmitHandler = (event) => {
   popupEditAvatar.waitSubmitButton('Сохранение...');
 
   api.editUserAvatar(popupAvatarInput.value)
-    .catch(error => console.log(error))
     .finally(() => {
       popupEditAvatar.close();
     });
@@ -143,8 +140,6 @@ const formDeleteSubmitHandler = (event, card) => {
   api.deleteCard(card.getIdCard())
     .then(response => {
       card.deleteCard();
-    }).catch(error => {
-      console.log(error);
     }).finally(() => {
       popupConfirm.close();
       popupConfirm.resetWaitSubmitButton();
@@ -167,9 +162,7 @@ const api = new Api({
 api.getInitialCards().then((cards) => {
   generateInitialCards(cards);
   }
-).catch(error => {
-  console.log(error);
-});
+);
 
 // Функция генерации изначальных карточек
 const generateInitialCards = (cards) => {
@@ -188,7 +181,7 @@ const generateInitialCards = (cards) => {
           resultApi.then(data => {
               card.setLikes(data.likes) // Обновляем список лайкнувших карточку
               card.renderLikes(); // Отрисовываем на клиенте
-            }).catch((error) => console.log(error));
+            });
         },
         deleteCardHandler: () => {
           popupConfirm.open(card);
@@ -207,8 +200,7 @@ api.getUserInfo().then((data => {
   profileName.textContent = data.name;
   profileProfession.textContent = data.about;
   avatarImage.src = data.avatar;
-}))
-  .catch((error) => console.log(error));
+}));
 
 
 // Включаем валидацию формы редактрования профиля

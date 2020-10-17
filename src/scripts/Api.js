@@ -1,8 +1,7 @@
 export default class Api {
-  constructor(options){
-    this._options = options;
-    this._baseUrl = this._options.baseUrl;
-    this._headers = this._options.headers;
+  constructor({baseUrl, headers}){
+    this._baseUrl = baseUrl;
+    this._headers = headers;
   }
 
   // Получить начальные карточки

@@ -29,8 +29,11 @@ export default class Api {
   }
 
   // Удалить карточку
-  deleteCard() {
-    
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
   }
 
   // Постановка лайка карточке

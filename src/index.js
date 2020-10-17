@@ -4,6 +4,7 @@ import Section from './scripts/Section.js';
 import UserInfo from './scripts/UserInfo.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
+import PopupWithSubmit from './scripts/PopupWithSubmit.js';
 import Api from './scripts/Api.js';
 import {settingsForm} from './scripts/constants.js';
 import {
@@ -37,6 +38,8 @@ import {
         titleCardInput,
         linkCardInput,
         popupAdd,
+        popupConfirmSelector,
+        popupConfirmCloseButtonSelector,
         gridCardTemplateId,
         keyCodeEsc,
         container} from './scripts/utils.js';
@@ -101,19 +104,22 @@ const formAddSubmitHandler = (event) => {
     const card = new Card (dataCard, userId, gridCardTemplateId,  
       {
         handleCardClick: (name, link) => {
-        popupWithImage.open(name, link);
-      },
-      likeCardHandler: () => {
-        const likedCard = card.likedCard();
-        const resultApi = likedCard ? api.unlikeCard(card.getIdCard()) : api.likeCard(card.getIdCard());
-  
-        resultApi.then(response => response.json())
-          .then(data => {
-            card.setLikes(data.likes) // Обновляем список лайкнувших карточку
-            card.renderLikes(); // Отрисовываем на клиенте
-          });
-      }
-    }, dataCard._id);
+          popupWithImage.open(name, link);
+        },
+        likeCardHandler: () => {
+          const likedCard = card.likedCard();
+          const resultApi = likedCard ? api.unlikeCard(card.getIdCard()) : api.likeCard(card.getIdCard());
+    
+          resultApi.then(response => response.json())
+            .then(data => {
+              card.setLikes(data.likes) // Обновляем список лайкнувших карточку
+              card.renderLikes(); // Отрисовываем на клиенте
+            });
+        },
+        deleteCardHandler: () => {
+          popupConfirm.open(card);
+        }
+      }, dataCard._id);
     const cardElement = card.generateCard();
     container.prepend(cardElement);
   })
@@ -136,6 +142,21 @@ const formEditAvatarSubmitHandler = (event) => {
     });
 }
 
+// ==Обработчик формы подтверждения удаления==
+const formDeleteSubmitHandler = (event, card) => {
+  event.preventDefault();
+
+  popupConfirm.waitSubmitButton('Удаление...');
+  api.deleteCard(card.getIdCard())
+    .then(response => {
+      card.deleteCard();
+    }).catch(error => {
+      console.log(error);
+    }).finally(() => {
+      popupConfirm.close();
+      popupConfirm.resetWaitSubmitButton();
+    })
+}
 // ____________________________________________________
 // ======== Изначальное состояние страницы ============
 // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -153,7 +174,9 @@ const api = new Api({
 api.getInitialCards().then((cards) => {
   generateInitialCards(cards);
   }
-);
+).catch(error => {
+  console.log(error);
+});
 
 // Функция генерации изначальных карточек
 const generateInitialCards = (cards) => {
@@ -174,6 +197,9 @@ const generateInitialCards = (cards) => {
               card.setLikes(data.likes) // Обновляем список лайкнувших карточку
               card.renderLikes(); // Отрисовываем на клиенте
             });
+        },
+        deleteCardHandler: () => {
+          popupConfirm.open(card);
         }
       }, item._id);
       const cardElement = card.generateCard();
@@ -223,5 +249,13 @@ popupEditAvatar.setEventListeners();
 const popupEditProfile = new PopupWithForm(popupEditSelector, popupEditCloseButtonSelector,
   formEditSubmitHandler)
 popupEditProfile.setEventListeners();
+
+// Попап подтвеждения удаления
+const popupConfirm = new PopupWithSubmit(popupConfirmSelector, popupConfirmCloseButtonSelector, 
+  (evt, card) => {
+    formDeleteSubmitHandler(evt, card)
+  }
+)
+popupConfirm.setEventListeners();
 
 

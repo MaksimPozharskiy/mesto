@@ -43,6 +43,10 @@ const popupAddForm = popupAdd.querySelector('.popup__form');
 const titleCardInput = popupAdd.querySelector('.popup__input_name_title-card');
 const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
 
+// ==Попап подтверждения==
+const popupConfirmSelector = '.popup_type_confirm';
+const popupConfirmCloseButtonSelector = '.popup__button-close';
+
 // ==Добавление карточки пользователем==
 const gridCardTemplateId = '#grid-item';
 
@@ -83,6 +87,8 @@ export {
   titleCardInput,
   linkCardInput,
   gridCardTemplateId,
+  popupConfirmSelector,
+  popupConfirmCloseButtonSelector,
   keyCodeEsc,
   popupAdd,
   container

@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({name, link, likes, owner}, userId, templateSelector, {handleCardClick, likeCardHandler}, cardId) {
+  constructor({name, link, likes, owner}, userId, templateSelector, {handleCardClick, likeCardHandler, deleteCardHandler}, cardId) {
     this._titleCard = name;
     this._linkCard = link;
     this._templateSelector = templateSelector;
@@ -11,18 +11,17 @@ export default class Card {
     // Обработчики
     this._handleCardClick = handleCardClick;
     this._likeCardHandler = likeCardHandler;
-  }
-
-  _deleteCardHandler() {
-    this._deleteIcon.closest('.grid-item').remove();
+    this._deleteCardHandler = deleteCardHandler;
   }
 
   _setEventListeners() {
-      this._image.addEventListener('click', () => {
+    this._image.addEventListener('click', () => {
       this._handleCardClick(this._titleCard, this._linkCard);
     })
-      this._deleteIcon.addEventListener('click', this._deleteCardHandler.bind(this));
-      this._likeButton.addEventListener('click', () => {
+    this._deleteIcon.addEventListener('click', () => {
+      this._deleteCardHandler();
+    })
+    this._likeButton.addEventListener('click', () => {
       this._likeCardHandler();
     })
   }
@@ -81,6 +80,11 @@ export default class Card {
   // Функция установки количества лайков !!!в свойства карточки!!!
   setLikes(listLikes) {
     this._countLikes = listLikes;
+  }
+
+  // Удалить карточку 
+  deleteCard() {
+    this._deleteIcon.closest('.grid-item').remove();
   }
 
 }

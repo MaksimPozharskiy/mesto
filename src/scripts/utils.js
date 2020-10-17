@@ -13,7 +13,7 @@ const profileProfession = document.querySelector(profileSelectors.profileProfess
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit')
 const popupEditSelector = '.popup_type_edit';
-const popupEditCloseButtonSelector = '.popup__button-close';
+const popupCloseButtonSelector = '.popup__button-close';
 const popupEditForm = popupEdit.querySelector('.popup__form');
 const nameInput = popupEdit.querySelector('.popup__input_name_name');
 const professionInput = popupEdit.querySelector('.popup__input_name_profession');
@@ -23,21 +23,18 @@ const avatarImage = document.querySelector('.profile__avatar')
 const popupAvatar = document.querySelector('.popup_type_avatar');
 const popupAvatarButton = document.querySelector('.profile__avatar-wrapp')
 const popupAvatarForm = popupAvatar.querySelector('.popup__form');
-const popupAvatarCloseButtonSelector = '.popup__button-close';
 const popupAvatarInput = popupAvatar.querySelector('.popup__input_name_link-avatar');
 const popupAvatarSubmitButton = popupAvatar.querySelector('.popup__button-save');
 
 // ==Попап увеличения картинки==
 const popupImageWrap = document.querySelector('.popup_type_image');
 const popupImageSelector = '.popup_type_image';
-const popupImageCloseButtonSelector = '.popup__button-close';
 const imageSelector = '.popup__image';
 const popupImageTitleSelector = '.popup__title-image';
 
 // ==Попап добавления карточки==
 const popupAddSelector = '.popup_type_add';
 const popupAddOpenButton = document.querySelector('.profile__add-button');
-const popupAddCloseButtonSelector = '.popup__button-close';
 const popupAdd = document.querySelector('.popup_type_add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const titleCardInput = popupAdd.querySelector('.popup__input_name_title-card');
@@ -45,7 +42,6 @@ const linkCardInput = popupAdd.querySelector('.popup__input_name_link-card');
 
 // ==Попап подтверждения==
 const popupConfirmSelector = '.popup_type_confirm';
-const popupConfirmCloseButtonSelector = '.popup__button-close';
 
 // ==Добавление карточки пользователем==
 const gridCardTemplateId = '#grid-item';
@@ -64,31 +60,27 @@ export {
   popupAvatar,
   avatarImage,
   popupAvatarForm,
-  popupAvatarCloseButtonSelector,
   popupAvatarButton,
   popupAvatarInput,
   popupAvatarSubmitButton,
   popupEditOpenButton,
   popupEdit,
   popupEditSelector,
-  popupEditCloseButtonSelector,
+  popupCloseButtonSelector,
   popupEditForm,
   nameInput,
   professionInput,
   popupImageWrap,
   popupImageSelector,
-  popupImageCloseButtonSelector,
   imageSelector,
   popupImageTitleSelector,
   popupAddSelector,
   popupAddOpenButton,
-  popupAddCloseButtonSelector,
   popupAddForm,
   titleCardInput,
   linkCardInput,
   gridCardTemplateId,
   popupConfirmSelector,
-  popupConfirmCloseButtonSelector,
   keyCodeEsc,
   popupAdd,
   container

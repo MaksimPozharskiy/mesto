@@ -7,12 +7,7 @@ export default class Api {
   // Получить начальные карточки
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {headers: this._headers})
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(response => this._checkRequestResult(response));
   }
 
   // Добавление новой карточки на сервер
@@ -25,6 +20,7 @@ export default class Api {
         link: link
       })
     })
+    .then(response => this._checkRequestResult(response));
   }
 
   // Удалить карточку
@@ -33,6 +29,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
+    .then(response => this._checkRequestResult(response));
   }
 
   // Постановка лайка карточке
@@ -41,6 +38,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
     })
+    .then(response => this._checkRequestResult(response));
   }
 
   // Удаление лайка карточке
@@ -49,22 +47,18 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
+    .then(response => this._checkRequestResult(response));
   }
   
   // Получить данные пользователя
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {headers: this._headers})
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then(response => this._checkRequestResult(response));
   }
 
   // Отредактировать данные пользователя
   editUserInfo(name, profession) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/use1rs/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -72,11 +66,7 @@ export default class Api {
         about: profession
       })
     })
-    .then(res => {
-      if (!res.ok) {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    })
+    .then(response => this._checkRequestResult(response));
   }
 
   // Отредактировать аватар пользователя
@@ -89,13 +79,15 @@ export default class Api {
         avatar: urlAvatar
       })
     })
-    .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`Ошибка: ${res.status}`);
-        }
-    })
+    .then(response => this._checkRequestResult(response));
   }
 
+  _checkRequestResult(response) {
+    if (response.ok) {
+      return response.json(); 
+    }
+    return Promise.reject(`Ошибка: ${response.status}`); 
+  }
 }
 
 

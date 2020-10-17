@@ -93,13 +93,8 @@ const formAddSubmitHandler = (event) => {
 
   const titleCard = titleCardInput.value;
   const linkCard = linkCardInput.value;
-  api.addCard(titleCard, linkCard).then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    return Promise.reject(`Ошибка: ${response.status}`);
-  })
-  .then(dataCard=> {
+  api.addCard(titleCard, linkCard)
+    .then(dataCard=> {
     const card = new Card (dataCard, userId, gridCardTemplateId,  
       {
         handleCardClick: (name, link) => {
@@ -109,13 +104,7 @@ const formAddSubmitHandler = (event) => {
           const likedCard = card.likedCard();
           const resultApi = likedCard ? api.unlikeCard(card.getIdCard()) : api.likeCard(card.getIdCard());
     
-          resultApi.then(response => {
-            if (response.ok) {
-              return response.json()
-            }
-            return Promise.reject(`Ошибка: ${response.status}`);
-          })
-            .then(data => {
+          resultApi.then(data => {
               card.setLikes(data.likes) // Обновляем список лайкнувших карточку
               card.renderLikes(); // Отрисовываем на клиенте
             }).catch((error) => console.log(error));
@@ -196,13 +185,7 @@ const generateInitialCards = (cards) => {
           const likedCard = card.likedCard();
           const resultApi = likedCard ? api.unlikeCard(card.getIdCard()) : api.likeCard(card.getIdCard());
 
-          resultApi.then(response => {
-            if (response.ok) {
-              return response.json()
-            }
-            return Promise.reject(`Ошибка: ${response.status}`);
-          })
-            .then(data => {
+          resultApi.then(data => {
               card.setLikes(data.likes) // Обновляем список лайкнувших карточку
               card.renderLikes(); // Отрисовываем на клиенте
             }).catch((error) => console.log(error));

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+<link href="main.css" rel="stylesheet"></head>
+<body class="container">
+  <div class="page">
+
+<!-- Header -->
+
+    <header class="header">
+      <img src="c2821b381952624d90e5c69c79bd1e58.svg" alt="Логотип Место" class="header__logo">
+    </header>
+
+<!-- Main -->
+
+    <main class="content">
+      <section class="profile">
+          <div class="profile__container">
+            <div class="profile__avatar-wrapp">
+              <img src="0d8bf8ce8297c29b461b8f32dc2ffd0d.jpg" alt="Аватар профиля" class="profile__avatar">
+              <img src="ae1a976ddb506239e9f06655014e44a3.svg" alt="Смена аватара" class="profile__avatar-edit">
+            </div>
+            <div class="profile__info">
+              <div class="profile__wrap">
+                <h1 class="profile__name">Максим Хорс</h1>
+                <button type="button" class="profile__edit-button"></button>
+              </div>
+              <p class="profile__profession">Конный спортсмен</p>
+            </div>
+          </div>
+          <button type="button" class="profile__add-button"></button>
+      </section>
+      
+      <section class="photos">
+        <ul class="grid-photos"></ul>
+      </section>
+    </main>
+
+<!-- Footer -->
+
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+  </div>
+
+<!-- Popup edit profile -->
+  <div class="popup popup_type_edit">
+    <div class="popup__container">
+      <h4 class="popup__title">Редактировать профиль</h4>
+      <form class="popup__form" name="editProfile" novalidate>
+        <input minlength="2" maxlength="40" type="text" class="popup__input popup__input_name_name" name="name" id="name-input" placeholder="Имя" value="Максим Хорс" required>
+        <span class='popup__input-error popup__input-error_active' id='name-input-error'></span>
+        <input minlength="2" maxlength="200" type="text" class="popup__input popup__input_name_profession" name="profession" placeholder="Вид деятельности" id="profession-input" value="Конный спортсмен" required>
+        <span class='popup__input-error popup__input-error_active' id='profession-input-error'></span>
+        <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
+      </form>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </div>
+
+<!-- Popup add card --> 
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <h4 class="popup__title">Новое место</h4>
+      <form class="popup__form" name="addCard" novalidate>
+        <input minlength="1" maxlength="30" type="text" placeholder="Название" class="popup__input popup__input_name_title-card" name="title-card" id="title-input" required>
+        <span class='popup__input-error' id='title-input-error'>Вы пропустили это поле.</span>
+        <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-card" name="link-card" id="link-input" required>
+        <span class='popup__input-error' id='link-input-error'>Вы пропустили это поле.</span>
+        <input type="submit" class="popup__button-save" value="Создать" name="submit">
+      </form>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </div>
+
+<!-- Popup image -->
+<div class="popup popup_type_image">
+  <div class="popup__wrap">
+    <img src="#" alt="" class="popup__image">
+    <p class="popup__title-image"></p>
+    <button type="button" class="popup__button-close"></button>
+  </div>
+</div>
+
+<!-- Popup edit avatar profile -->
+<div class="popup popup_type_avatar">
+  <div class="popup__container">
+    <h4 class="popup__title">Обновить аватар</h4>
+    <form class="popup__form" name="editAvatar" novalidate>
+      <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_name_link-avatar" name="avatar-input" id="avatar-input" required>
+      <span class='popup__input-error' id='avatar-input-error'>Заполните это поле.</span>
+      <input type="submit" class="popup__button-save" value="Сохранить" name="submit">
+    </form>
+    <button type="button" class="popup__button-close"></button>
+  </div>
+</div>
+
+<!-- Popup confirm -->
+<div class="popup popup_type_confirm">
+  <div class="popup__container">
+    <h4 class="popup__title">Вы уверены?</h4>
+    <form class="popup__form" name="confirm" novalidate>
+      <input type="submit" class="popup__button-save" value="Да" name="submit">
+    </form>
+    <button type="button" class="popup__button-close"></button>
+  </div>
+</div>
+
+<!-- Templates -->
+  <template id="grid-item">
+    <li class="grid-item">
+      <img src="e3c42771bff3aaa52f76f96a20d90bef.svg" alt="" class="grid-item__delete-icon">
+      <img src="#" alt="" class="grid-item__image">
+      <div class="grid-item__wrap">
+        <h3 class="grid-item__name"></h3>
+        <div class="grid-item__like-container">
+          <svg class='grid-item__like' width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path  d="M19.154 9.33822C21.294 7.19832 21.294 3.72364 19.154 1.60492C17.014 -0.534975 13.5392 -0.534975 11.3992 1.60492L10.361 2.66428L9.32276 1.62611C7.18277 -0.534975 3.70792 -0.534975 1.58911 1.60492C0.550891 2.64309 0 4.02026 0 5.48217C0 6.94408 0.572079 8.32124 1.58911 9.35941L10.361 18.1309L19.154 9.33822Z" />
+          </svg>
+          <p class="grid-item__like-counter">1</p>
+        </div>
+      </div>
+    </li>
+  </template>
+
+<script src="main.js"></script></body>
+</html>
